@@ -14,6 +14,7 @@ async function bootstrap() {
   .setDescription("Capybara Hub Hotel System Management API")
   .setVersion("1.0")
   .addTag("CapybaraHub")
+  .addBearerAuth({ type: "apiKey", name: "Authorization", in: "header" })
   .build();
 
   const documentFactory = ( ) => SwaggerModule.createDocument(app, config)
