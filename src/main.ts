@@ -12,13 +12,20 @@ async function bootstrap() {
   const config = new DocumentBuilder()
   .setTitle("Capybara Hub")
   .setDescription("Capybara Hub Hotel System Management API")
-  .setVersion("1.0")
+  .setVersion("0.0.1")
   .addTag("CapybaraHub")
   .addBearerAuth({ type: "apiKey", name: "Authorization", in: "header" })
   .build();
 
   const documentFactory = ( ) => SwaggerModule.createDocument(app, config)
+  const document = documentFactory();
   SwaggerModule.setup("api", app, documentFactory)
+
+  // if (document) {
+  //   fs.writeFileSync('./swagger.json', JSON.stringify(document, null, 2));
+  // } else {
+  //   console.error('Swagger document is undefined');
+  // }
 
   await app.listen(process.env.PORT ?? 3000);
 }
