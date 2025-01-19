@@ -9,7 +9,7 @@ import { Room } from "./entities/room.entity";
 export class RoomsService {
   constructor(@InjectModel(Room.name) private roomModel: Model<Room>) {}
 
-  create(createRoomDto: CreateRoomDto) {
+  async create(createRoomDto: CreateRoomDto) {
     return "This action adds a new room";
   }
 
@@ -17,15 +17,15 @@ export class RoomsService {
     return this.roomModel.find().exec();
   }
 
-  findOne(id: number) {
+  async findOne(id: string) {
     return `This action returns a #${id} room`;
   }
 
-  update(id: number, updateRoomDto: UpdateRoomDto) {
+  async update(id: string, updateRoomDto: UpdateRoomDto) {
     return `This action updates a #${id} room`;
   }
 
-  remove(id: number) {
+  async remove(id: string) {
     return `This action removes a #${id} room`;
   }
 }

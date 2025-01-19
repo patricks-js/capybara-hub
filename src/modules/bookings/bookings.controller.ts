@@ -1,7 +1,10 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { ApiBearerAuth, ApiBody, ApiCreatedResponse, ApiForbiddenResponse, ApiNotFoundResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
+// biome-ignore lint/style/useImportType: <explanation>
 import { BookingsService } from './bookings.service';
+// biome-ignore lint/style/useImportType: <explanation>
 import { CreateBookingDto } from './dto/create-booking.dto';
+// biome-ignore lint/style/useImportType: <explanation>
 import { UpdateBookingDto } from './dto/update-booking.dto';
 import { Booking } from './entities/booking.entity';
 
@@ -34,7 +37,7 @@ export class BookingsController {
   @ApiNotFoundResponse({description:'Not found bookings'})
   @ApiBody({type: Booking})
   findOne(@Param('id') id: string) {
-    return this.bookingsService.findOne(+id);
+    return this.bookingsService.findOne(id);
   }
 
   @Patch(':id')
@@ -43,7 +46,7 @@ export class BookingsController {
   @ApiNotFoundResponse({description:'Not found bookings'})
   @ApiBody({type: UpdateBookingDto})
   update(@Param('id') id: string, @Body() updateBookingDto: UpdateBookingDto) {
-    return this.bookingsService.update(+id, updateBookingDto);
+    return this.bookingsService.update(id, updateBookingDto);
   }
 
   @Delete(':id')
@@ -51,6 +54,6 @@ export class BookingsController {
   @ApiForbiddenResponse({  description: 'Forbidden.'})
   @ApiNotFoundResponse({description:'Not found bookings'})
   remove(@Param('id') id: string) {
-    return this.bookingsService.remove(+id);
+    return this.bookingsService.remove(id);
   }
 }

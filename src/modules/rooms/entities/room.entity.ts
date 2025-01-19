@@ -1,7 +1,5 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { HydratedDocument, SchemaTypes } from "mongoose";
-
-export type RoomDocument = HydratedDocument<Room>;
+import { type HydratedDocument, SchemaTypes } from "mongoose";
 
 export enum RoomType {
   SINGLE = "Single 1 bad",
@@ -11,31 +9,23 @@ export enum RoomType {
   SUITE_FAMILY = "Suite 1 bad for 2 peoples and a little kid",
 }
 
-@Schema({ collection: "rooms" })
+@Schema({ collection: "rooms", timestamps: true })
 export class Room {
-  @Prop({ type: SchemaTypes.ObjectId, ref: "Hotel" })
-  _id: string;
+  @Prop({ type: SchemaTypes.ObjectId, ref: "Hotel", required: true })
+  hotel_id: string;
 
   @Prop({ enum: RoomType, required: true })
-  roomType: RoomType;
+  room_type: RoomType;
 
   @Prop({ required: true })
-  description: string;
+  room_number: string;
 
   @Prop({ required: true })
-  pricePerNight: number;
+  price_per_night: number;
 
-  @Prop({ required: true })
-  amenities: string[];
-
-  @Prop({ default: true })
-  availability: boolean;
-
-  @Prop({ default: Date.now })
-  createdAt: Date;
-
-  @Prop({ default: Date.now })
-  updatedAt: Date;
+  @Prop({ required: true, default: true })
+  is_available: boolean;
 }
 
+export type RoomDocument = HydratedDocument<Room>;
 export const RoomSchema = SchemaFactory.createForClass(Room);

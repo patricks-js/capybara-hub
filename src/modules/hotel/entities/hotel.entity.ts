@@ -1,23 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { HydratedDocument } from "mongoose";
+import type { HydratedDocument } from "mongoose";
 
-export type HotelDocument = HydratedDocument<Hotel>;
-
-interface Coordinates {
-  latitude: number;
-  longitude: number;
-}
-
-interface Address {
-  street: string;
-  city: string;
-  state: string;
-  zip: string;
-  country: string;
-  coordinates?: Coordinates;
-}
-
-@Schema({ collection: "hotels" })
+@Schema({ collection: "hotels", timestamps: true })
 export class Hotel {
   @Prop({ required: true })
   name: string;
@@ -25,14 +9,21 @@ export class Hotel {
   @Prop({ required: true })
   description: string;
 
-  @Prop({ type: [Object], required: true })
-  addresses: Address[];
+  @Prop({ required: true })
+  address: string;
 
-  @Prop({ default: Date.now })
-  createdAt: Date;
+  @Prop({ required: true })
+  city: string;
 
-  @Prop({ default: Date.now })
-  updatedAt: Date;
+  @Prop({ required: true })
+  state: string;
+
+  @Prop({ required: true })
+  zip_code: string;
+
+  @Prop()
+  phone_number: string;
 }
 
+export type HotelDocument = HydratedDocument<Hotel>;
 export const HotelSchema = SchemaFactory.createForClass(Hotel);

@@ -10,6 +10,7 @@ import {
 import { ApiBearerAuth, ApiBody, ApiCreatedResponse, ApiForbiddenResponse, ApiNotFoundResponse, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { CreateRoomDto } from "./dto/create-room.dto";
 import { UpdateRoomDto } from "./dto/update-room.dto";
+
 import { Room } from "./entities/room.entity";
 import { RoomsService } from "./rooms.service";
 
@@ -42,7 +43,7 @@ export class RoomsController {
   @ApiNotFoundResponse({description:'Not found rooms'})
   @ApiBody({type: Room})
   findOne(@Param("id") id: string) {
-    return this.roomsService.findOne(+id);
+    return this.roomsService.findOne(id);
   }
 
   @Patch(":id")
@@ -51,7 +52,7 @@ export class RoomsController {
   @ApiNotFoundResponse({description:'Not found rooms'})
   @ApiBody({type: [UpdateRoomDto]})
   update(@Param("id") id: string, @Body() updateRoomDto: UpdateRoomDto) {
-    return this.roomsService.update(+id, updateRoomDto);
+    return this.roomsService.update(id, updateRoomDto);
   }
 
   @Delete(":id")
@@ -59,6 +60,6 @@ export class RoomsController {
   @ApiForbiddenResponse({  description: 'Forbidden.'})
   @ApiNotFoundResponse({description:'Not found rooms'})
   remove(@Param("id") id: string) {
-    return this.roomsService.remove(+id);
+    return this.roomsService.remove(id);
   }
 }

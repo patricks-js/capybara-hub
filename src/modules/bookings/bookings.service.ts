@@ -11,23 +11,24 @@ export class BookingsService {
     @InjectModel(Booking.name) private bookingModel: Model<Booking>,
   ) {}
 
-  create(createBookingDto: CreateBookingDto) {
-    return "This action adds a new booking";
+  async create(createBookingDto: CreateBookingDto): Promise<Booking> {
+    const booking = new this.bookingModel(createBookingDto);
+    return booking.save();
   }
 
   async findAll(): Promise<Booking[]> {
     return this.bookingModel.find().exec();
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return `This action returns a #${id} booking`;
   }
 
-  update(id: number, updateBookingDto: UpdateBookingDto) {
+  update(id: string, updateBookingDto: UpdateBookingDto) {
     return `This action updates a #${id} booking`;
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} booking`;
   }
 }

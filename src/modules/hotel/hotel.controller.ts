@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/commo
 import { ApiBearerAuth, ApiBody, ApiCreatedResponse, ApiForbiddenResponse, ApiNotFoundResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateHotelDto } from './dto/create-hotel.dto';
 import { UpdateHotelDto } from './dto/update-hotel.dto';
+
 import { Hotel } from './entities/hotel.entity';
 import { HotelService } from './hotel.service';
 
@@ -34,7 +35,7 @@ export class HotelController {
   @ApiNotFoundResponse({description:'Not found hotel'})
   @ApiBody({type: Hotel})
   findOne(@Param('id') id: string) {
-    return this.hotelService.findOne(+id);
+    return this.hotelService.findOne(id);
   }
 
   @Patch(':id')
@@ -43,7 +44,7 @@ export class HotelController {
   @ApiNotFoundResponse({description:'Not found hotel'})
   @ApiBody({type: UpdateHotelDto})
   update(@Param('id') id: string, @Body() updateHotelDto: UpdateHotelDto) {
-    return this.hotelService.update(+id, updateHotelDto);
+    return this.hotelService.update(id, updateHotelDto);
   }
 
   @Delete(':id')
@@ -51,6 +52,6 @@ export class HotelController {
   @ApiForbiddenResponse({  description: 'Forbidden.'})
   @ApiNotFoundResponse({description:'Not found hotel'})
   remove(@Param('id') id: string) {
-    return this.hotelService.remove(+id);
+    return this.hotelService.remove(id);
   }
 }
