@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
-import { ApiBearerAuth, ApiBody, ApiCreatedResponse, ApiForbiddenResponse, ApiNotFoundResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiCreatedResponse, ApiForbiddenResponse, ApiNotFoundResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 // biome-ignore lint/style/useImportType: <explanation>
 import { BookingsService } from './bookings.service';
 // biome-ignore lint/style/useImportType: <explanation>
@@ -15,7 +15,7 @@ export class BookingsController {
   constructor(private readonly bookingsService: BookingsService) {}
 
   @Post()
-  @ApiCreatedResponse({description: 'The record has been successfully created.'})
+  @ApiCreatedResponse({description: 'The record has been successfully created.', type:Booking})
   @ApiForbiddenResponse({description: 'Forbidden.'})
   @ApiBody({type: CreateBookingDto})
   create(@Body() createBookingDto: CreateBookingDto) {
@@ -23,34 +23,32 @@ export class BookingsController {
   }
 
   @Get()
-  @ApiResponse({ status: 200, description: 'Get All bookings successfully'})
+  @ApiOkResponse({ description: 'Get All bookings successfully', type:[Booking]})
   @ApiForbiddenResponse({ description: 'Forbidden.'})
   @ApiNotFoundResponse({description:'Not found bookings'})
-  @ApiBody({type: [Booking]})
   findAll() {
     return this.bookingsService.findAll();
   }
 
   @Get(':id')
-  @ApiResponse({ status: 200, description: 'Get booking by id successfully'})
+  @ApiOkResponse({type:Booking,  description: 'Get booking by id successfully'})
   @ApiForbiddenResponse({  description: 'Forbidden.'})
   @ApiNotFoundResponse({description:'Not found bookings'})
-  @ApiBody({type: Booking})
   findOne(@Param('id') id: string) {
     return this.bookingsService.findOne(id);
   }
 
   @Patch(':id')
-  @ApiResponse({ status: 200, description: 'Update booking successfully'})
+  @ApiOkResponse({ description: 'Update booking successfully'})
   @ApiForbiddenResponse({description: 'Forbidden.'})
   @ApiNotFoundResponse({description:'Not found bookings'})
-  @ApiBody({type: UpdateBookingDto})
+  @ApiBody({type: CreateBookingDto})
   update(@Param('id') id: string, @Body() updateBookingDto: UpdateBookingDto) {
     return this.bookingsService.update(id, updateBookingDto);
   }
 
   @Delete(':id')
-  @ApiResponse({ status: 200, description: 'Delete booking successfully'})
+  @ApiOkResponse({ description: 'Delete booking successfully'})
   @ApiForbiddenResponse({  description: 'Forbidden.'})
   @ApiNotFoundResponse({description:'Not found bookings'})
   remove(@Param('id') id: string) {
