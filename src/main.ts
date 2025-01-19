@@ -1,5 +1,6 @@
 import { NestFactory } from "@nestjs/core";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+// import * as fs from "node:fs";
 import { AppModule } from "./app.module";
 
 async function bootstrap() {
@@ -19,10 +20,10 @@ async function bootstrap() {
 
   const documentFactory = ( ) => SwaggerModule.createDocument(app, config)
   const document = documentFactory();
-  SwaggerModule.setup("api", app, documentFactory)
+  SwaggerModule.setup("api-docs", app, documentFactory)
 
   // if (document) {
-  //   fs.writeFileSync('./swagger.json', JSON.stringify(document, null, 2));
+  //   fs.writeFileSync('./api-docs.json', JSON.stringify(document, null, 2));
   // } else {
   //   console.error('Swagger document is undefined');
   // }
