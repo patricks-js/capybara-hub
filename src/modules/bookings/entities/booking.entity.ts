@@ -1,7 +1,5 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { HydratedDocument, SchemaTypes } from "mongoose";
-
-export type BookingDocument = HydratedDocument<Booking>;
+import { type HydratedDocument, SchemaTypes } from "mongoose";
 
 export enum BookingStatus {
   PENDING = "Pending",
@@ -11,34 +9,29 @@ export enum BookingStatus {
   CANCELLED = "Cancelled",
 }
 
-@Schema({ collection: "bookings" })
+@Schema({ collection: "bookings", timestamps: true })
 export class Booking {
   @Prop({ type: SchemaTypes.ObjectId, ref: "User", required: true })
-  userId: string;
-
-  @Prop({ type: SchemaTypes.ObjectId, ref: "Hotel", required: true })
-  hotelId: string;
+  user_id: string;
 
   @Prop({ type: SchemaTypes.ObjectId, ref: "Room", required: true })
-  roomId: string;
+  room_id: string;
+
+  @Prop({ type: SchemaTypes.ObjectId, ref: "Hotel", required: true })
+  hotel_id: string;
 
   @Prop({ required: true })
-  checkIn: Date;
+  check_in_date: Date;
 
   @Prop({ required: true })
-  checkOut: Date;
+  check_out_date: Date;
 
   @Prop({ required: true })
-  totalPrice: number;
+  total_price: number;
 
   @Prop({ enum: BookingStatus, required: true, default: BookingStatus.PENDING })
   status: BookingStatus;
-
-  @Prop({ default: Date.now })
-  createdAt: Date;
-
-  @Prop({ default: Date.now })
-  updatedAt: Date;
 }
 
+export type BookingDocument = HydratedDocument<Booking>;
 export const BookingSchema = SchemaFactory.createForClass(Booking);

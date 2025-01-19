@@ -1,6 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+// biome-ignore lint/style/useImportType: <explanation>
 import { BookingsService } from './bookings.service';
+// biome-ignore lint/style/useImportType: <explanation>
 import { CreateBookingDto } from './dto/create-booking.dto';
+// biome-ignore lint/style/useImportType: <explanation>
 import { UpdateBookingDto } from './dto/update-booking.dto';
 
 @Controller('bookings')
@@ -19,16 +22,16 @@ export class BookingsController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.bookingsService.findOne(+id);
+    return this.bookingsService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateBookingDto: UpdateBookingDto) {
-    return this.bookingsService.update(+id, updateBookingDto);
+    return this.bookingsService.update(id, updateBookingDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.bookingsService.remove(+id);
+    return this.bookingsService.remove(id);
   }
 }
