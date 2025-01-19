@@ -7,7 +7,7 @@ import {
   Patch,
   Post,
 } from "@nestjs/common";
-import { ApiBearerAuth, ApiBody, ApiCreatedResponse, ApiForbiddenResponse, ApiNotFoundResponse, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiBody, ApiCreatedResponse, ApiForbiddenResponse, ApiNotFoundResponse, ApiOkResponse, ApiTags } from "@nestjs/swagger";
 import { CreateRoomDto } from "./dto/create-room.dto";
 import { UpdateRoomDto } from "./dto/update-room.dto";
 
@@ -21,7 +21,7 @@ export class RoomsController {
   constructor(private readonly roomsService: RoomsService) {}
 
   @Post()
-  @ApiCreatedResponse({description: 'The record has been successfully created.'})
+  @ApiCreatedResponse({description: 'The record has been successfully created.', type: Room})
   @ApiForbiddenResponse({description: 'Forbidden.'})
   @ApiBody({type: CreateRoomDto})
   create(@Body() createRoomDto: CreateRoomDto) {
@@ -29,34 +29,32 @@ export class RoomsController {
   }
 
   @Get()
-  @ApiResponse({ status: 200, description: 'Get All rooms successfully'})
+  @ApiOkResponse({ description: 'Get All rooms successfully', type: [Room]})
   @ApiForbiddenResponse({ description: 'Forbidden.'})
   @ApiNotFoundResponse({description:'Not found rooms'})
-  @ApiBody({type: [Room]})
   findAll() {
     return this.roomsService.findAll();
   }
 
   @Get(":id")
-  @ApiResponse({ status: 200, description: 'Get rooms by id successfully'})
+  @ApiOkResponse({ description: 'Get rooms by id successfully', type: Room})
   @ApiForbiddenResponse({  description: 'Forbidden.'})
   @ApiNotFoundResponse({description:'Not found rooms'})
-  @ApiBody({type: Room})
   findOne(@Param("id") id: string) {
     return this.roomsService.findOne(id);
   }
 
   @Patch(":id")
-  @ApiResponse({ status: 200, description: 'Update rooms successfully'})
+  @ApiOkResponse({description: 'Update rooms successfully'})
   @ApiForbiddenResponse({description: 'Forbidden.'})
   @ApiNotFoundResponse({description:'Not found rooms'})
-  @ApiBody({type: [UpdateRoomDto]})
+  @ApiBody({type: [CreateRoomDto]})
   update(@Param("id") id: string, @Body() updateRoomDto: UpdateRoomDto) {
     return this.roomsService.update(id, updateRoomDto);
   }
 
   @Delete(":id")
-  @ApiResponse({ status: 200, description: 'Delete rooms successfully'})
+  @ApiOkResponse({ description: 'Delete rooms successfully'})
   @ApiForbiddenResponse({  description: 'Forbidden.'})
   @ApiNotFoundResponse({description:'Not found rooms'})
   remove(@Param("id") id: string) {
