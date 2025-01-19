@@ -11,16 +11,16 @@ async function bootstrap() {
   });
 
   const config = new DocumentBuilder()
-  .setTitle("Capybara Hub")
-  .setDescription("Capybara Hub Hotel System Management API")
-  .setVersion("0.0.1")
-  .addTag("CapybaraHub")
-  .addBearerAuth({ type: "apiKey", name: "Authorization", in: "header" })
-  .build();
+    .setTitle("Capybara Hub")
+    .setDescription("Capybara Hub Hotel System Management API")
+    .setVersion("0.0.1")
+    .addTag("CapybaraHub")
+    .addBearerAuth({ type: "apiKey", name: "Authorization", in: "header" })
+    .build();
 
-  const documentFactory = ( ) => SwaggerModule.createDocument(app, config)
+  const documentFactory = () => SwaggerModule.createDocument(app, config);
   const document = documentFactory();
-  SwaggerModule.setup("api-docs", app, documentFactory)
+  SwaggerModule.setup("api/docs", app, documentFactory);
 
   // if (document) {
   //   fs.writeFileSync('./api-docs.json', JSON.stringify(document, null, 2));

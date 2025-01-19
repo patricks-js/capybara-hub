@@ -35,9 +35,7 @@
             "bearer": []
           }
         ],
-        "tags": [
-          "bookings"
-        ]
+        "tags": ["bookings"]
       },
       "get": {
         "operationId": "BookingsController_findAll",
@@ -68,9 +66,7 @@
             "bearer": []
           }
         ],
-        "tags": [
-          "bookings"
-        ]
+        "tags": ["bookings"]
       }
     },
     "/api/bookings/{id}": {
@@ -109,9 +105,7 @@
             "bearer": []
           }
         ],
-        "tags": [
-          "bookings"
-        ]
+        "tags": ["bookings"]
       },
       "patch": {
         "operationId": "BookingsController_update",
@@ -151,9 +145,7 @@
             "bearer": []
           }
         ],
-        "tags": [
-          "bookings"
-        ]
+        "tags": ["bookings"]
       },
       "delete": {
         "operationId": "BookingsController_remove",
@@ -183,9 +175,7 @@
             "bearer": []
           }
         ],
-        "tags": [
-          "bookings"
-        ]
+        "tags": ["bookings"]
       }
     },
     "/api/rooms": {
@@ -222,9 +212,7 @@
             "bearer": []
           }
         ],
-        "tags": [
-          "rooms"
-        ]
+        "tags": ["rooms"]
       },
       "get": {
         "operationId": "RoomsController_findAll",
@@ -255,9 +243,7 @@
             "bearer": []
           }
         ],
-        "tags": [
-          "rooms"
-        ]
+        "tags": ["rooms"]
       }
     },
     "/api/rooms/{id}": {
@@ -296,9 +282,7 @@
             "bearer": []
           }
         ],
-        "tags": [
-          "rooms"
-        ]
+        "tags": ["rooms"]
       },
       "patch": {
         "operationId": "RoomsController_update",
@@ -341,9 +325,7 @@
             "bearer": []
           }
         ],
-        "tags": [
-          "rooms"
-        ]
+        "tags": ["rooms"]
       },
       "delete": {
         "operationId": "RoomsController_remove",
@@ -373,9 +355,7 @@
             "bearer": []
           }
         ],
-        "tags": [
-          "rooms"
-        ]
+        "tags": ["rooms"]
       }
     },
     "/api/hotel": {
@@ -412,9 +392,7 @@
             "bearer": []
           }
         ],
-        "tags": [
-          "hotel"
-        ]
+        "tags": ["hotel"]
       },
       "get": {
         "operationId": "HotelController_findAll",
@@ -445,9 +423,7 @@
             "bearer": []
           }
         ],
-        "tags": [
-          "hotel"
-        ]
+        "tags": ["hotel"]
       }
     },
     "/api/hotel/{id}": {
@@ -486,9 +462,7 @@
             "bearer": []
           }
         ],
-        "tags": [
-          "hotel"
-        ]
+        "tags": ["hotel"]
       },
       "patch": {
         "operationId": "HotelController_update",
@@ -528,9 +502,7 @@
             "bearer": []
           }
         ],
-        "tags": [
-          "hotel"
-        ]
+        "tags": ["hotel"]
       },
       "delete": {
         "operationId": "HotelController_remove",
@@ -560,9 +532,7 @@
             "bearer": []
           }
         ],
-        "tags": [
-          "hotel"
-        ]
+        "tags": ["hotel"]
       }
     },
     "/api/users": {
@@ -591,9 +561,7 @@
             }
           }
         },
-        "tags": [
-          "user"
-        ]
+        "tags": ["user"]
       },
       "get": {
         "operationId": "UserController_findAll",
@@ -624,9 +592,7 @@
             "bearer": []
           }
         ],
-        "tags": [
-          "user"
-        ]
+        "tags": ["user"]
       }
     },
     "/api/users/login": {
@@ -655,9 +621,7 @@
             }
           }
         },
-        "tags": [
-          "user"
-        ]
+        "tags": ["user"]
       }
     },
     "/api/users/{id}": {
@@ -696,9 +660,7 @@
             "bearer": []
           }
         ],
-        "tags": [
-          "user"
-        ]
+        "tags": ["user"]
       },
       "patch": {
         "operationId": "UserController_update",
@@ -738,9 +700,7 @@
             "bearer": []
           }
         ],
-        "tags": [
-          "user"
-        ]
+        "tags": ["user"]
       },
       "delete": {
         "operationId": "UserController_remove",
@@ -770,9 +730,7 @@
             "bearer": []
           }
         ],
-        "tags": [
-          "user"
-        ]
+        "tags": ["user"]
       }
     }
   },
@@ -880,12 +838,7 @@
             "type": "number"
           }
         },
-        "required": [
-          "hotel_id",
-          "room_number",
-          "room_type",
-          "price_per_night"
-        ]
+        "required": ["hotel_id", "room_number", "room_type", "price_per_night"]
       },
       "Room": {
         "type": "object",
@@ -1000,12 +953,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "name",
-          "email",
-          "password",
-          "phone"
-        ]
+        "required": ["name", "email", "password", "phone"]
       },
       "User": {
         "type": "object",
@@ -1023,12 +971,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "name",
-          "email",
-          "password_hash",
-          "phone"
-        ]
+        "required": ["name", "email", "password_hash", "phone"]
       },
       "LoginDto": {
         "type": "object",
@@ -1040,10 +983,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "email",
-          "password"
-        ]
+        "required": ["email", "password"]
       }
     }
   }
