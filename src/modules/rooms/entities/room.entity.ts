@@ -1,4 +1,5 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { ApiProperty } from "@nestjs/swagger";
 import { type HydratedDocument, SchemaTypes } from "mongoose";
 
 export enum RoomType {
@@ -12,18 +13,23 @@ export enum RoomType {
 @Schema({ collection: "rooms", timestamps: true })
 export class Room {
   @Prop({ type: SchemaTypes.ObjectId, ref: "Hotel", required: true })
+  @ApiProperty()
   hotel_id: string;
 
   @Prop({ enum: RoomType, required: true })
+  @ApiProperty()
   room_type: RoomType;
 
   @Prop({ required: true })
+  @ApiProperty()
   room_number: string;
 
   @Prop({ required: true })
+  @ApiProperty()
   price_per_night: number;
 
   @Prop({ required: true, default: true })
+  @ApiProperty()
   is_available: boolean;
 }
 
