@@ -7,7 +7,7 @@ import {
   Patch,
   Post,
 } from "@nestjs/common";
-import { ApiBearerAuth, ApiBody, ApiCreatedResponse, ApiForbiddenResponse, ApiNotFoundResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiCreatedResponse, ApiForbiddenResponse, ApiNotFoundResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CreateUserDto } from "./dto/create-user.dto";
 import { LoginDto } from "./dto/login.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
@@ -20,28 +20,30 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  @ApiCreatedResponse({description: 'The record has been successfully created.'})
+  @ApiCreatedResponse({description: 'The record has been successfully created.', type:User})
+  @ApiBody({type: CreateUserDto})
   async create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }
 
   @Post("login")
+  @ApiBody({type: LoginDto})
+  @ApiOkResponse({type:User})
   async login(@Body() loginDto: LoginDto) {
     return this.userService.authenticate(loginDto);
   }
 
   @Get()
   @ApiBearerAuth()
-  @ApiResponse({ status: 200, description: 'Get All users successfully'})
+  @ApiOkResponse({ description: 'Get All users successfully',type: [User]})
   @ApiForbiddenResponse({ description: 'Forbidden.'})
   @ApiNotFoundResponse({description:'Not found users'})
-  @ApiBody({type: [User]})
   async findAll() {
     return this.userService.findAll();
   }
 
   @Get(':id')
-  @ApiResponse({ status: 200, description: 'Get user by id successfully'})
+  @ApiOkResponse({ description: 'Get user by id successfully', type:User})
   @ApiForbiddenResponse({  description: 'Forbidden.'})
   @ApiNotFoundResponse({description:'Not found user'})
   @ApiBearerAuth()
@@ -50,17 +52,17 @@ export class UserController {
   }
 
   @Patch(':id')
-  @ApiResponse({ status: 200, description: 'Update user successfully'})
+  @ApiOkResponse({ description: 'Update user successfully'})
   @ApiForbiddenResponse({description: 'Forbidden.'})
   @ApiNotFoundResponse({description:'Not found user'})
   @ApiBearerAuth()
-  @ApiBody({type: UpdateUserDto})
+  @ApiBody({type: CreateUserDto})
   async update(@Param("id") id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.userService.update(id, updateUserDto);
   }
 
   @Delete(':id')
-  @ApiResponse({ status: 200, description: 'Delete user successfully'})
+  @ApiOkResponse({description: 'Delete user successfully'})
   @ApiForbiddenResponse({  description: 'Forbidden.'})
   @ApiNotFoundResponse({description:'Not found user'})
   @ApiBearerAuth()
