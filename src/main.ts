@@ -2,6 +2,7 @@ import { NestFactory } from "@nestjs/core";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 // import * as fs from "node:fs";
 import { AppModule } from "./app.module";
+import { ErrorHandlerFilter } from "./middlewares/error-handler.filter";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -9,6 +10,7 @@ async function bootstrap() {
   app.enableCors({
     origin: "*",
   });
+  app.useGlobalFilters(new ErrorHandlerFilter());
 
   const config = new DocumentBuilder()
     .setTitle("Capybara Hub")
