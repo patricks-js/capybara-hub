@@ -1,6 +1,5 @@
-const bookings = [
+export const bookings = [
   {
-    id: "1",
     user_id: "201",
     room_id: "1",
     check_in_date: "2025-01-20",
@@ -9,7 +8,6 @@ const bookings = [
     status: "confirmed",
   },
   {
-    id: "2",
     user_id: "202",
     room_id: "2",
     check_in_date: "2025-02-01",
@@ -18,7 +16,6 @@ const bookings = [
     status: "pending",
   },
   {
-    id: "3",
     user_id: "203",
     room_id: "3",
     check_in_date: "2025-03-10",
@@ -27,5 +24,3 @@ const bookings = [
     status: "cancelled",
   },
 ];
-
-export default bookings;

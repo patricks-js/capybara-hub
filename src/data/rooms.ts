@@ -1,6 +1,5 @@
-const rooms = [
+export const rooms = [
   {
-    id: "1",
     hotel_id: "101",
     room_number: "101",
     room_type: "Single",
@@ -8,7 +7,6 @@ const rooms = [
     is_available: true,
   },
   {
-    id: "2",
     hotel_id: "102",
     room_number: "202",
     room_type: "Double",
@@ -16,7 +14,6 @@ const rooms = [
     is_available: false,
   },
   {
-    id: "3",
     hotel_id: "103",
     room_number: "303",
     room_type: "Suite",
@@ -24,5 +21,3 @@ const rooms = [
     is_available: true,
   },
 ];
-
-export default rooms;
