@@ -9,15 +9,14 @@ import {
 import { createZodDto } from "nestjs-zod";
 import { z } from "zod";
 
-const CredentialsSchema = z.object({
+const schema = z.object({
   name: z.string().min(4).max(40),
   email: z.string().email(),
   password: z.string().min(6),
   phone: z.string(),
 });
 
-// class is required for using DTO as a type
-export class CreateUserDto extends createZodDto(CredentialsSchema) {}
+export class CreateUserDto extends createZodDto(schema) {}
 
 export class CredentialsDto {
   @IsString()
