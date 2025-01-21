@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { ApiProperty } from "@nestjs/swagger";
 import { type HydratedDocument, SchemaTypes } from "mongoose";
 
-@Schema({ collection: "promotions", timestamps: true })
+@Schema({ collection: "promotions", timestamps: true, versionKey: false })
 export class Promotion {
   @Prop({ type: SchemaTypes.ObjectId, ref: "Booking", required: true })
   @ApiProperty()

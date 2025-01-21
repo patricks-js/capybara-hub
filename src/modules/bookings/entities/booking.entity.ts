@@ -10,7 +10,7 @@ export enum BookingStatus {
   CANCELLED = "Cancelled",
 }
 
-@Schema({ collection: "bookings", timestamps: true })
+@Schema({ collection: "bookings", timestamps: true, versionKey: false })
 export class Booking {
   @Prop({ type: SchemaTypes.ObjectId, ref: "User", required: true })
   @ApiProperty()
