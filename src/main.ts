@@ -1,16 +1,20 @@
 import { NestFactory } from "@nestjs/core";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 // import * as fs from "node:fs";
+import { Logger } from "nestjs-pino";
 import { AppModule } from "./app.module";
 import { ErrorHandlerFilter } from "./middlewares/error-handler.filter";
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    bufferLogs: true,
+  });
   app.setGlobalPrefix("api");
   app.enableCors({
     origin: "*",
   });
   app.useGlobalFilters(new ErrorHandlerFilter());
+  app.useLogger(app.get(Logger))
 
   const config = new DocumentBuilder()
     .setTitle("Capybara Hub")
