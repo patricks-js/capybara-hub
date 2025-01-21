@@ -10,7 +10,7 @@ export enum RoomType {
   SUITE_FAMILY = "Suite 1 bad for 2 peoples and a little kid",
 }
 
-@Schema({ collection: "rooms", timestamps: true })
+@Schema({ collection: "rooms", timestamps: true, versionKey: false })
 export class Room {
   @Prop({ type: SchemaTypes.ObjectId, ref: "Hotel", required: true })
   @ApiProperty()

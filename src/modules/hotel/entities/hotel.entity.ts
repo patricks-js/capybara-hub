@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { ApiProperty } from "@nestjs/swagger";
 import type { HydratedDocument } from "mongoose";
 
-@Schema({ collection: "hotels", timestamps: true })
+@Schema({ collection: "hotels", timestamps: true, versionKey: false })
 export class Hotel {
   @Prop({ required: true })
   @ApiProperty()

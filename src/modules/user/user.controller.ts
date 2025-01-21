@@ -3,6 +3,8 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
+  HttpStatus,
   Param,
   Patch,
   Post,
@@ -37,6 +39,7 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
+  @HttpCode(HttpStatus.OK)
   @Post("login")
   @ApiBody({ type: LoginDto })
   @ApiOkResponse({ type: User })
@@ -72,6 +75,7 @@ export class UserController {
     return this.userService.update(id, updateUserDto);
   }
 
+  @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(":id")
   @ApiOkResponse({ description: "Delete user successfully" })
   @ApiForbiddenResponse({ description: "Forbidden." })
