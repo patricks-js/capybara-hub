@@ -3,6 +3,7 @@ import {
   Injectable,
   UnauthorizedException,
 } from "@nestjs/common";
+import { JwtService } from "@nestjs/jwt";
 import { InjectModel } from "@nestjs/mongoose";
 import bcrypt from "bcryptjs";
 import type { Model } from "mongoose";
@@ -11,9 +12,23 @@ import type { LoginDto } from "./dto/login.dto";
 import type { UpdateUserDto } from "./dto/update-user.dto";
 import { User } from "./entities/user.entity";
 
+type Payload = {
+  sub: string;
+  name: string;
+  email: string;
+};
+
+type AuthResult = {
+  accessToken: string;
+  user: Payload;
+};
+
 @Injectable()
 export class UserService {
-  constructor(@InjectModel(User.name) private userModel: Model<User>) {}
+  constructor(
+    @InjectModel(User.name) private userModel: Model<User>,
+    private jwtService: JwtService,
+  ) {}
 
   async create(createUserDto: CreateUserDto): Promise<User> {
     const existingUser = await this.userModel.findOne({
@@ -36,18 +51,33 @@ export class UserService {
     return user.save();
   }
 
-  async authenticate({ email, password }: LoginDto): Promise<User> {
-    const user = await this.userModel.findOne({ email });
-    if (!user) {
+  async authenticate({ email, password }: LoginDto): Promise<AuthResult> {
+    const payload = await this.validateUser({ email, password });
+
+    if (!payload) {
       throw new UnauthorizedException("Invalid credentials");
     }
+
+    const accessToken = await this.jwtService.signAsync(payload);
+
+    return {
+      accessToken,
+      user: payload,
+    };
+  }
+
+  async validateUser({ email, password }: LoginDto): Promise<Payload | null> {
+    const user = await this.userModel.findOne({ email });
+    if (!user) return null;
 
     const isPasswordValid = await bcrypt.compare(password, user.password_hash);
-    if (!isPasswordValid) {
-      throw new UnauthorizedException("Invalid credentials");
-    }
+    if (!isPasswordValid) return null;
 
-    return user;
+    return {
+      sub: user._id.toString(),
+      name: user.name,
+      email: user.email,
+    };
   }
 
   async findAll(): Promise<User[]> {
