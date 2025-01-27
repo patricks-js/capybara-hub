@@ -6,8 +6,8 @@ import {
   HttpCode,
   HttpStatus,
   Param,
-  Patch,
   Post,
+  Put,
 } from "@nestjs/common";
 import {
   ApiBearerAuth,
@@ -65,7 +65,7 @@ export class UserController {
     return this.userService.findOne(id);
   }
 
-  @Patch(":id")
+  @Put(":id")
   @ApiOkResponse({ description: "Update user successfully" })
   @ApiForbiddenResponse({ description: "Forbidden." })
   @ApiNotFoundResponse({ description: "Not found user" })
