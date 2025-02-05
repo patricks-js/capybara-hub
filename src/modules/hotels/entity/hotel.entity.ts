@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { HydratedDocument } from "mongoose";
+import { HydratedDocument, Types } from "mongoose";
 
 import { Address, AddressSchema } from "@/common/schemas/address.schema";
 
@@ -19,4 +19,5 @@ export class Hotel {
 }
 
 export const HotelSchema = SchemaFactory.createForClass(Hotel);
-export type HotelDocument = HydratedDocument<Hotel>;
+export type HotelDocumentOverride = { address: Types.Subdocument<Address> };
+export type HotelDocument = HydratedDocument<Hotel, HotelDocumentOverride>;

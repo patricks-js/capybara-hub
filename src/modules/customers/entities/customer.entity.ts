@@ -22,9 +22,7 @@ export class Customer {
 }
 
 export const CustomerSchema = SchemaFactory.createForClass(Customer);
-export type CustomerDocumentOverride = {
-  name: Types.Subdocument<Types.ObjectId & Address>;
-};
+export type CustomerDocumentOverride = { address: Types.Subdocument<Address> };
 export type CustomerDocument = HydratedDocument<
   Customer,
   CustomerDocumentOverride

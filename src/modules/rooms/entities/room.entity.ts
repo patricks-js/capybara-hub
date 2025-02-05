@@ -23,6 +23,8 @@ export class Room {
   status: string;
 }
 
-export type RoomDocument = HydratedDocument<Room>;
 export const RoomSchema = SchemaFactory.createForClass(Room);
+export type RoomDocumentOverride = { roomType: Types.Subdocument<RoomType> };
+export type RoomDocument = HydratedDocument<Room, RoomDocumentOverride>;
+
 RoomSchema.index({ hotel: 1, roomType: 1, roomNumber: 1 }, { unique: true });
