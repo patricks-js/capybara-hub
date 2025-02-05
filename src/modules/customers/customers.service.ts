@@ -5,6 +5,12 @@ import { CreateCustomerDTO } from "./dto/create-customer.dto";
 import { UpdateCustomerDTO } from "./dto/update-customer.dto";
 import { Customer } from "./entities/customer.schema";
 
+/**
+ * TODO: Implement delete profile
+ * TODO: Implement get user own profile
+ * TODO: Implement edit address
+ */
+
 @Injectable()
 export class CustomersService {
   constructor(

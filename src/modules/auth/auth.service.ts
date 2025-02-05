@@ -10,6 +10,10 @@ import { CustomersService } from "../customers/customers.service";
 import { SigninDTO } from "./dto/signin.dto";
 import { SignupDTO } from "./dto/signup.dto";
 
+/**
+ * TODO: Implement signout
+ */
+
 @Injectable()
 export class AuthService {
   constructor(
