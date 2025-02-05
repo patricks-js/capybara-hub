@@ -1,6 +1,7 @@
 import { NestFactory } from "@nestjs/core";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 // import * as fs from "node:fs";
+import { ValidationPipe } from "@nestjs/common";
 import { Logger } from "nestjs-pino";
 import { AppModule } from "./app.module";
 import { ErrorHandlerFilter } from "./middlewares/error-handler.filter";
@@ -14,7 +15,8 @@ async function bootstrap() {
     origin: "*",
   });
   app.useGlobalFilters(new ErrorHandlerFilter());
-  app.useLogger(app.get(Logger))
+  app.useLogger(app.get(Logger));
+  app.useGlobalPipes(new ValidationPipe());
 
   const config = new DocumentBuilder()
     .setTitle("Capybara Hub")
