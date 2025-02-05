@@ -11,7 +11,6 @@ import { BookingsModule } from "./modules/bookings/bookings.module";
 import { CustomersModule } from "./modules/customers/customers.module";
 import { HotelsModule } from "./modules/hotels/hotels.module";
 import { RoomsModule } from "./modules/rooms/rooms.module";
-import { UserModule } from "./modules/user/user.module";
 
 config({
   path: ".env.local",
@@ -36,12 +35,11 @@ config({
       },
     }),
     MongooseModule.forRoot(process.env.DATABASE_URL),
-    BookingsModule,
-    RoomsModule,
-    UserModule,
     AuthModule,
     CustomersModule,
     HotelsModule,
+    RoomsModule,
+    BookingsModule,
   ],
   providers: [
     {

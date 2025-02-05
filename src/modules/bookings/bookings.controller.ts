@@ -8,7 +8,6 @@ import {
   Post,
 } from "@nestjs/common";
 import {
-  ApiBearerAuth,
   ApiBody,
   ApiCreatedResponse,
   ApiForbiddenResponse,
@@ -23,7 +22,6 @@ import { Booking } from "./entities/booking.entity";
 
 @ApiTags("bookings")
 @Controller("bookings")
-@ApiBearerAuth()
 export class BookingsController {
   constructor(private readonly bookingsService: BookingsService) {}
 

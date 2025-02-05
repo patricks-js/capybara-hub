@@ -8,7 +8,6 @@ import {
   Post,
 } from "@nestjs/common";
 import {
-  ApiBearerAuth,
   ApiBody,
   ApiCreatedResponse,
   ApiForbiddenResponse,
@@ -16,7 +15,6 @@ import {
   ApiOkResponse,
   ApiTags,
 } from "@nestjs/swagger";
-
 import { CreateRoomDto } from "./dto/create-room.dto";
 import { UpdateRoomDto } from "./dto/update-room.dto";
 import { Room } from "./entities/room.entity";
@@ -24,7 +22,6 @@ import { RoomsService } from "./rooms.service";
 
 @ApiTags("rooms")
 @Controller("rooms")
-@ApiBearerAuth()
 export class RoomsController {
   constructor(private readonly roomsService: RoomsService) {}
 
