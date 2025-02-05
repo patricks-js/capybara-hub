@@ -10,7 +10,7 @@ export class Address {
   number: number;
 
   @Prop({ required: true })
-  postal_code: string;
+  postalCode: string;
 
   @Prop({ required: true })
   state: string;
