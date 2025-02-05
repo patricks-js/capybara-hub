@@ -1,28 +1,24 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { ApiProperty } from "@nestjs/swagger";
-import { type HydratedDocument, SchemaTypes } from "mongoose";
+import { type HydratedDocument, Types } from "mongoose";
 
-@Schema({ collection: "promotions", timestamps: true, versionKey: false })
+@Schema({ _id: false })
 export class Promotion {
-  @Prop({ type: SchemaTypes.ObjectId, ref: "Booking", required: true })
-  @ApiProperty()
-  booking_id: string;
+  @Prop({ required: true })
+  title: string;
 
   @Prop({ required: true })
-  @ApiProperty()
   description: string;
 
-  @Prop({ required: true })
+  @Prop({ type: Types.Decimal128, required: true })
   @ApiProperty()
-  discount_percentage: number;
+  discountPercentage: Types.Decimal128;
 
   @Prop({ required: true })
-  @ApiProperty()
-  start_date: Date;
+  startDate: Date;
 
   @Prop({ required: true })
-  @ApiProperty()
-  end_date: Date;
+  endDate: Date;
 }
 
 export type PromotionDocument = HydratedDocument<Promotion>;

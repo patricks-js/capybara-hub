@@ -1,0 +1,20 @@
+meta {
+  name: Signup
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{url}}/auth/signup
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Patrick Lucas",
+    "email": "patrick2@gmail.com",
+    "password": "Patrick123@",
+    "phone": "81998765432"
+  }
+}

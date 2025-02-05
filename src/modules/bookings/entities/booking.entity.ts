@@ -1,45 +1,50 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { ApiProperty } from "@nestjs/swagger";
-import { type HydratedDocument, SchemaTypes } from "mongoose";
+import { type HydratedDocument, Types } from "mongoose";
+
+import { Customer } from "@/modules/customers/entities/customer.entity";
+import { Hotel } from "@/modules/hotels/entity/hotel.entity";
+import { Room } from "@/modules/rooms/entities/room.entity";
+import { Promotion, PromotionSchema } from "./promotion.entity";
 
 export enum BookingStatus {
   PENDING = "Pending",
-  REJECTED = "Rejected",
-  ACCEPTED = "Accepted",
-  FINISHED = "Finished",
+  CONFIRMED = "Confirmed",
+  COMPLETED = "Completed",
   CANCELLED = "Cancelled",
 }
 
 @Schema({ collection: "bookings", timestamps: true, versionKey: false })
 export class Booking {
-  @Prop({ type: SchemaTypes.ObjectId, ref: "User", required: true })
-  @ApiProperty()
-  user_id: string;
+  @Prop({ type: Types.ObjectId, ref: Customer.name, required: true })
+  customer: Types.ObjectId;
 
-  @Prop({ type: SchemaTypes.ObjectId, ref: "Room", required: true })
-  @ApiProperty()
-  room_id: string;
+  @Prop({ type: Types.ObjectId, ref: Hotel.name, required: true })
+  hotel: Types.ObjectId;
 
-  @Prop({ type: SchemaTypes.ObjectId, ref: "Hotel", required: true })
-  @ApiProperty()
-  hotel_id: string;
+  @Prop({ type: Types.ObjectId, ref: Room.name, required: true })
+  room: Types.ObjectId;
 
   @Prop({ required: true })
-  @ApiProperty()
-  check_in_date: Date;
+  checkInDate: Date;
 
   @Prop({ required: true })
-  @ApiProperty()
-  check_out_date: Date;
+  checkoutDate: Date;
 
-  @Prop({ required: true })
-  @ApiProperty()
-  total_price: number;
+  @Prop({ enum: BookingStatus, required: true })
+  status: string;
 
-  @Prop({ enum: BookingStatus, required: true, default: BookingStatus.PENDING })
-  @ApiProperty()
-  status: BookingStatus;
+  @Prop({ type: Types.Decimal128, required: true })
+  totalPrice: Types.Decimal128;
+
+  @Prop({ type: PromotionSchema })
+  promotion: Promotion;
 }
 
-export type BookingDocument = HydratedDocument<Booking>;
 export const BookingSchema = SchemaFactory.createForClass(Booking);
+export type BookingDocumentOverride = {
+  promotion: Types.Subdocument<Promotion>;
+};
+export type BookingDocument = HydratedDocument<
+  Booking,
+  BookingDocumentOverride
+>;

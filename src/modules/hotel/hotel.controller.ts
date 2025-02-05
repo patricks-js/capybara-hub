@@ -16,59 +16,45 @@ import {
   ApiOkResponse,
   ApiTags,
 } from "@nestjs/swagger";
-import { CreateHotelDto } from "./dto/create-hotel.dto";
-import { UpdateHotelDto } from "./dto/update-hotel.dto";
-
-import { Hotel } from "./entities/hotel.entity";
-import { HotelService } from "./hotel.service";
+import { CreateHotelDTO } from "../hotels/dto/create-hotel.dto";
+import { UpdateHotelDTO } from "../hotels/dto/update-hotel.dto";
+import { Hotel } from "../hotels/entity/hotel.entity";
 
 @ApiTags("hotel")
 @Controller("hotel")
 @ApiBearerAuth()
 export class HotelController {
-  constructor(private readonly hotelService: HotelService) {}
-
   @Post()
   @ApiCreatedResponse({
     description: "The record has been successfully created.",
     type: Hotel,
   })
   @ApiForbiddenResponse({ description: "Forbidden." })
-  @ApiBody({ type: CreateHotelDto })
-  create(@Body() createHotelDto: CreateHotelDto) {
-    return this.hotelService.create(createHotelDto);
-  }
+  @ApiBody({ type: CreateHotelDTO })
+  create(@Body() createHotelDto: CreateHotelDTO) {}
 
   @Get()
   @ApiOkResponse({ description: "Get All hotel successfully", type: [Hotel] })
   @ApiForbiddenResponse({ description: "Forbidden." })
   @ApiNotFoundResponse({ description: "Not found hotel" })
-  findAll() {
-    return this.hotelService.findAll();
-  }
+  findAll() {}
 
   @Get(":id")
   @ApiOkResponse({ description: "Get hotel by id successfully", type: Hotel })
   @ApiForbiddenResponse({ description: "Forbidden." })
   @ApiNotFoundResponse({ description: "Not found hotel" })
-  findOne(@Param("id") id: string) {
-    return this.hotelService.findOne(id);
-  }
+  findOne(@Param("id") id: string) {}
 
   @Patch(":id")
   @ApiOkResponse({ description: "Update hotel successfully" })
   @ApiForbiddenResponse({ description: "Forbidden." })
   @ApiNotFoundResponse({ description: "Not found hotel" })
-  @ApiBody({ type: CreateHotelDto })
-  update(@Param("id") id: string, @Body() updateHotelDto: UpdateHotelDto) {
-    return this.hotelService.update(id, updateHotelDto);
-  }
+  @ApiBody({ type: UpdateHotelDTO })
+  update(@Param("id") id: string, @Body() updateHotelDto: UpdateHotelDTO) {}
 
   @Delete(":id")
   @ApiOkResponse({ description: "Delete hotel successfully" })
   @ApiForbiddenResponse({ description: "Forbidden." })
   @ApiNotFoundResponse({ description: "Not found hotel" })
-  remove(@Param("id") id: string) {
-    return this.hotelService.remove(id);
-  }
+  remove(@Param("id") id: string) {}
 }

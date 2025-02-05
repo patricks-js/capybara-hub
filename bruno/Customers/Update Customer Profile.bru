@@ -1,0 +1,18 @@
+meta {
+  name: Update Customer Profile
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{url}}/customers/67a29c117cc3fb3465f5a528
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Patrick",
+    "phone": "81983026693"
+  }
+}

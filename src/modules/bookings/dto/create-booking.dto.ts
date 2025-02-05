@@ -1,37 +1,39 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsDateString, IsMongoId, IsNumber, IsPositive } from "class-validator";
-import { createZodDto } from "nestjs-zod";
-import { z } from "zod";
+import {
+  IsDateString,
+  IsDecimal,
+  IsEnum,
+  IsMongoId,
+  IsNotEmpty,
+} from "class-validator";
 
-const schema = z.object({
-  user_id: z.string().min(24),
-  room_id: z.string().min(24),
-  check_in_date: z.coerce.date(),
-  check_out_date: z.coerce.date(),
-  total_price: z.number().positive(),
-});
+import { BookingStatus } from "../entities/booking.entity";
 
-export class CreateBookingDto extends createZodDto(schema) {}
-
-export class CreateBookingDto2 {
+export class CreateBookingDTO {
   @IsMongoId()
-  @ApiProperty()
-  user_id: string;
+  @IsNotEmpty()
+  customerId: string;
 
   @IsMongoId()
-  @ApiProperty()
-  room_id: string;
+  @IsNotEmpty()
+  hotelId: string;
+
+  @IsMongoId()
+  @IsNotEmpty()
+  roomId: string;
 
   @IsDateString()
-  @ApiProperty()
-  check_in_date: string;
+  @IsNotEmpty()
+  checkInDate: string;
 
   @IsDateString()
-  @ApiProperty()
-  check_out_date: string;
+  @IsNotEmpty()
+  checkoutDate: string;
 
-  @IsNumber()
-  @IsPositive()
-  @ApiProperty()
-  total_price: number;
+  @IsDecimal()
+  @IsNotEmpty()
+  totalPrice: string;
+
+  @IsEnum(BookingStatus)
+  @IsNotEmpty()
+  status: string;
 }
