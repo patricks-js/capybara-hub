@@ -6,7 +6,7 @@ import {
   Param,
   Put,
 } from "@nestjs/common";
-import { ApiTags } from "@nestjs/swagger";
+import { ApiOkResponse, ApiTags } from "@nestjs/swagger";
 import { CustomersService } from "./customers.service";
 import { UpdateCustomerDto } from "./dto/update-customer.dto";
 
@@ -17,6 +17,7 @@ export class CustomersController {
 
   @Put(":id")
   @HttpCode(HttpStatus.NO_CONTENT)
+  @ApiOkResponse({ description: "Update profile successfully" })
   updateProfile(
     @Param("id") id: string,
     @Body() updateCustomerDto: UpdateCustomerDto,
