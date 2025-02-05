@@ -1,10 +1,10 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
-import { APP_PIPE } from "@nestjs/core";
+import { APP_GUARD } from "@nestjs/core";
 import { MongooseModule } from "@nestjs/mongoose";
 import { config } from "dotenv";
 import { LoggerModule } from "nestjs-pino";
-import { ZodValidationPipe } from "nestjs-zod";
+import { AuthGuard } from "./common/guards/auth.guard";
 import { PinoLoggerService } from "./logging/pino-logger";
 import { AuthModule } from "./modules/auth/auth.module";
 import { BookingsModule } from "./modules/bookings/bookings.module";
@@ -43,8 +43,8 @@ config({
   ],
   providers: [
     {
-      provide: APP_PIPE,
-      useClass: ZodValidationPipe,
+      provide: APP_GUARD,
+      useClass: AuthGuard,
     },
     {
       provide: "LOGGER_SERVICE",
