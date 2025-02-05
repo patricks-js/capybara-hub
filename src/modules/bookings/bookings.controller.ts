@@ -17,8 +17,8 @@ import {
   ApiTags,
 } from "@nestjs/swagger";
 import { BookingsService } from "./bookings.service";
-import { CreateBookingDto } from "./dto/create-booking.dto";
-import { UpdateBookingDto } from "./dto/update-booking.dto";
+import { CreateBookingDTO } from "./dto/create-booking.dto";
+import { UpdateBookingDTO } from "./dto/update-booking.dto";
 import { Booking } from "./entities/booking.entity";
 
 @ApiTags("bookings")
@@ -33,10 +33,8 @@ export class BookingsController {
     type: Booking,
   })
   @ApiForbiddenResponse({ description: "Forbidden." })
-  @ApiBody({ type: CreateBookingDto })
-  create(@Body() createBookingDto: CreateBookingDto) {
-    return this.bookingsService.create(createBookingDto);
-  }
+  @ApiBody({ type: CreateBookingDTO })
+  create(@Body() createBookingDTO: CreateBookingDTO) {}
 
   @Get()
   @ApiOkResponse({
@@ -45,9 +43,7 @@ export class BookingsController {
   })
   @ApiForbiddenResponse({ description: "Forbidden." })
   @ApiNotFoundResponse({ description: "Not found bookings" })
-  findAll() {
-    return this.bookingsService.findAll();
-  }
+  findAll() {}
 
   @Get(":id")
   @ApiOkResponse({
@@ -56,24 +52,18 @@ export class BookingsController {
   })
   @ApiForbiddenResponse({ description: "Forbidden." })
   @ApiNotFoundResponse({ description: "Not found bookings" })
-  findOne(@Param("id") id: string) {
-    return this.bookingsService.findOne(id);
-  }
+  findOne(@Param("id") id: string) {}
 
   @Patch(":id")
   @ApiOkResponse({ description: "Update booking successfully" })
   @ApiForbiddenResponse({ description: "Forbidden." })
   @ApiNotFoundResponse({ description: "Not found bookings" })
-  @ApiBody({ type: CreateBookingDto })
-  update(@Param("id") id: string, @Body() updateBookingDto: UpdateBookingDto) {
-    return this.bookingsService.update(id, updateBookingDto);
-  }
+  @ApiBody({ type: UpdateBookingDTO })
+  update(@Param("id") id: string, @Body() updateBookingDto: UpdateBookingDTO) {}
 
   @Delete(":id")
   @ApiOkResponse({ description: "Delete booking successfully" })
   @ApiForbiddenResponse({ description: "Forbidden." })
   @ApiNotFoundResponse({ description: "Not found bookings" })
-  remove(@Param("id") id: string) {
-    return this.bookingsService.remove(id);
-  }
+  remove(@Param("id") id: string) {}
 }
