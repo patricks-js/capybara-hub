@@ -1,37 +1,28 @@
+import { Hotel } from "@/modules/hotels/entity/hotel.entity";
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { ApiProperty } from "@nestjs/swagger";
-import { type HydratedDocument, SchemaTypes } from "mongoose";
+import { HydratedDocument, Types } from "mongoose";
+import { RoomType } from "./room-type.entity";
 
-export enum RoomType {
-  SINGLE = "Single 1 bad",
-  DOUBLE = "Double 2 bads",
-  TRIPLE = "Triple 3 bads",
-  SUITE = "Suite 1 bad for two peoples",
-  SUITE_FAMILY = "Suite 1 bad for 2 peoples and a little kid",
-}
+export const roomStatuses = ["available", "occupied", "maintenance"] as const;
 
-@Schema({ collection: "rooms", timestamps: true, versionKey: false })
+@Schema({ collection: "rooms", versionKey: false })
 export class Room {
-  @Prop({ type: SchemaTypes.ObjectId, ref: "Hotel", required: true })
-  @ApiProperty()
-  hotel_id: string;
+  @Prop({ required: true, type: Types.ObjectId, ref: Hotel.name })
+  hotel: Types.ObjectId;
 
-  @Prop({ enum: RoomType, required: true })
-  @ApiProperty()
-  room_type: RoomType;
+  @Prop({ required: true, type: Types.ObjectId, ref: RoomType.name })
+  roomType: Types.ObjectId;
 
-  @Prop({ required: true })
-  @ApiProperty()
-  room_number: string;
+  @Prop({ required: true, type: Types.Decimal128 })
+  pricePerNight: Types.Decimal128;
 
   @Prop({ required: true })
-  @ApiProperty()
-  price_per_night: number;
+  roomNumber: number;
 
-  @Prop({ required: true, default: true })
-  @ApiProperty()
-  is_available: boolean;
+  @Prop({ required: true, enum: roomStatuses })
+  status: string;
 }
 
 export type RoomDocument = HydratedDocument<Room>;
 export const RoomSchema = SchemaFactory.createForClass(Room);
+RoomSchema.index({ hotel: 1, roomType: 1, roomNumber: 1 }, { unique: true });

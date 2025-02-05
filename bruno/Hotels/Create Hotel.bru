@@ -6,6 +6,22 @@ meta {
 
 post {
   url: {{url}}/hotels
-  body: none
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "name": "Capybarinha",
+    "email": "capybarinha2@capybarahub.com",
+    "phone": "81991222493",
+    "address": {
+      "street": "Rua Olinda",
+      "number": 47,
+      "postalCode": "53600-000",
+      "state": "Pernambuco",
+      "city": "Recife",
+      "country": "Brasil"
+    }
+  }
 }
