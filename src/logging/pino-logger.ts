@@ -1,17 +1,21 @@
-import { LoggerService } from '@nestjs/common';
-import pino from 'pino';
-import pretty from 'pino-pretty';
+import { LoggerService } from "@nestjs/common";
+import pino from "pino";
+import pretty from "pino-pretty";
 
 const stream = pretty({
   colorize: true,
-  translateTime: 'SYS:standard',
-  ignore: 'pid,hostname',
-  messageFormat: '{req.method} {req.url} {res.statusCode} {req.headers.content-type} {req.headers.user-agent} {req.headers.host} {req.headers.connection} {remoteAddress} {remotePort} {responseTime}ms',
+  translateTime: "SYS:standard",
+  ignore: "pid,hostname",
+  messageFormat:
+    "{req.method} {req.url} {res.statusCode} {req.headers.content-type} {req.headers.user-agent} {req.headers.host} {req.headers.connection} {remoteAddress} {remotePort} {responseTime}ms",
 });
 
-const logger = pino({
-  level: 'debug',
-}, stream);
+const logger = pino(
+  {
+    level: "debug",
+  },
+  stream,
+);
 
 export class PinoLoggerService implements LoggerService {
   log(message: string) {

@@ -18,7 +18,7 @@ import {
 } from "@nestjs/swagger";
 
 import { CreateRoomDTO } from "./dto/create-room.dto";
-import { UpdateRoomDto } from "./dto/update-room.dto";
+import { UpdateRoomDTO } from "./dto/update-room.dto";
 import { Room } from "./entities/room.entity";
 import { RoomsService } from "./rooms.service";
 
@@ -56,7 +56,7 @@ export class RoomsController {
   @ApiForbiddenResponse({ description: "Forbidden." })
   @ApiNotFoundResponse({ description: "Not found rooms" })
   @ApiBody({ type: [CreateRoomDTO] })
-  update(@Param("id") id: string, @Body() updateRoomDto: UpdateRoomDto) {}
+  update(@Param("id") id: string, @Body() updateRoomDTO: UpdateRoomDTO) {}
 
   @Delete(":id")
   @ApiOkResponse({ description: "Delete rooms successfully" })

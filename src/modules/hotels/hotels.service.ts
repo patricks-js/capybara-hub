@@ -6,7 +6,7 @@ import { Hotel } from "./entity/hotel.entity";
 
 /**
  * TODO: Implement search all hotels with pagination
- * TODO: Implement hotel by address
+ * TODO: Implement search hotel by address
  * TODO: Implement sorting
  * TODO: Implement search by name
  * TODO: Implement update hotel

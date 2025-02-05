@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { HydratedDocument } from "mongoose";
 
-@Schema({ _id: false, versionKey: false, collection: "addresses" })
+@Schema({ _id: false })
 export class Address {
   @Prop({ required: true })
   street: string;

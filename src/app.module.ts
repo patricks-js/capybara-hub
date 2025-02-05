@@ -6,7 +6,6 @@ import { config } from "dotenv";
 import { LoggerModule } from "nestjs-pino";
 import { ZodValidationPipe } from "nestjs-zod";
 import { PinoLoggerService } from "./logging/pino-logger";
-import { AddressesModule } from "./modules/addresses/addresses.module";
 import { AuthModule } from "./modules/auth/auth.module";
 import { BookingsModule } from "./modules/bookings/bookings.module";
 import { CustomersModule } from "./modules/customers/customers.module";
@@ -41,7 +40,6 @@ config({
     RoomsModule,
     UserModule,
     AuthModule,
-    AddressesModule,
     CustomersModule,
     HotelsModule,
   ],

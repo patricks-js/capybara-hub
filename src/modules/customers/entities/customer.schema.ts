@@ -1,10 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { HydratedDocument, Types } from "mongoose";
 
-import {
-  Address,
-  AddressSchema,
-} from "@/modules/addresses/entities/address.entity";
+import { Address, AddressSchema } from "@/common/schemas/address.schema";
 
 @Schema({ collection: "customers", timestamps: true, versionKey: false })
 export class Customer {

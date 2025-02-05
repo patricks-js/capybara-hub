@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsNumber, IsPostalCode, IsString } from "class-validator";
 
-export class CreateAddressDTO {
+export class CreateCustomerAddressDTO {
   @IsString({ message: "This is not a valid street" })
   @IsNotEmpty()
   street: string;

@@ -1,4 +1,3 @@
-import { Address } from "@/modules/addresses/entities/address.entity";
 import {
   IsEmail,
   IsNotEmpty,
@@ -6,6 +5,7 @@ import {
   IsPhoneNumber,
   IsString,
 } from "class-validator";
+import { CreateHotelAddressDTO } from "./create-hotel-address.dto";
 
 export class CreateHotelDTO {
   @IsString()
@@ -25,5 +25,5 @@ export class CreateHotelDTO {
 
   @IsNotEmpty()
   @IsObject()
-  readonly address?: Address;
+  readonly address?: CreateHotelAddressDTO;
 }

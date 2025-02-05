@@ -8,7 +8,8 @@ import { Customer } from "./entities/customer.schema";
 /**
  * TODO: Implement delete profile
  * TODO: Implement get user own profile
- * TODO: Implement edit address
+ * TODO: Implement add address
+ * TODO: Implement update address
  */
 
 @Injectable()
