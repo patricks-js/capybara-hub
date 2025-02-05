@@ -1,4 +1,4 @@
-import { PartialType } from "@nestjs/mapped-types";
+import { PartialType } from "@nestjs/swagger";
 import { CreateCustomerAddressDto } from "./create-customer-address.dto";
 
 export class UpdateCustomerAddressDto extends PartialType(
