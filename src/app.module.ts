@@ -10,7 +10,7 @@ import { AddressesModule } from "./modules/addresses/addresses.module";
 import { AuthModule } from "./modules/auth/auth.module";
 import { BookingsModule } from "./modules/bookings/bookings.module";
 import { CustomersModule } from "./modules/customers/customers.module";
-import { HotelModule } from "./modules/hotel/hotel.module";
+import { HotelsModule } from "./modules/hotels/hotels.module";
 import { RoomsModule } from "./modules/rooms/rooms.module";
 import { UserModule } from "./modules/user/user.module";
 
@@ -39,11 +39,11 @@ config({
     MongooseModule.forRoot(process.env.DATABASE_URL),
     BookingsModule,
     RoomsModule,
-    HotelModule,
     UserModule,
     AuthModule,
     AddressesModule,
     CustomersModule,
+    HotelsModule,
   ],
   providers: [
     {
