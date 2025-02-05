@@ -1,10 +1,10 @@
 import { IsObject, IsPhoneNumber } from "class-validator";
-import { UpdateHotelAddressDTO } from "./update-hotel-address.dto";
+import { UpdateHotelAddressDto } from "./update-hotel-address.dto";
 
-export class UpdateHotelDTO {
+export class UpdateHotelDto {
   @IsPhoneNumber("BR")
   readonly phone?: string;
 
   @IsObject()
-  readonly address?: UpdateHotelAddressDTO;
+  readonly address?: UpdateHotelAddressDto;
 }

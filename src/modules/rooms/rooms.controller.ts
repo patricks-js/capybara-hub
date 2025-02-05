@@ -17,8 +17,8 @@ import {
   ApiTags,
 } from "@nestjs/swagger";
 
-import { CreateRoomDTO } from "./dto/create-room.dto";
-import { UpdateRoomDTO } from "./dto/update-room.dto";
+import { CreateRoomDto } from "./dto/create-room.dto";
+import { UpdateRoomDto } from "./dto/update-room.dto";
 import { Room } from "./entities/room.entity";
 import { RoomsService } from "./rooms.service";
 
@@ -34,9 +34,9 @@ export class RoomsController {
     type: Room,
   })
   @ApiForbiddenResponse({ description: "Forbidden." })
-  @ApiBody({ type: CreateRoomDTO })
-  create(@Body() createRoomDTO: CreateRoomDTO) {
-    return this.roomsService.create(createRoomDTO);
+  @ApiBody({ type: CreateRoomDto })
+  create(@Body() createRoomDto: CreateRoomDto) {
+    return this.roomsService.create(createRoomDto);
   }
 
   @Get()
@@ -55,8 +55,8 @@ export class RoomsController {
   @ApiOkResponse({ description: "Update rooms successfully" })
   @ApiForbiddenResponse({ description: "Forbidden." })
   @ApiNotFoundResponse({ description: "Not found rooms" })
-  @ApiBody({ type: [CreateRoomDTO] })
-  update(@Param("id") id: string, @Body() updateRoomDTO: UpdateRoomDTO) {}
+  @ApiBody({ type: [CreateRoomDto] })
+  update(@Param("id") id: string, @Body() updateRoomDto: UpdateRoomDto) {}
 
   @Delete(":id")
   @ApiOkResponse({ description: "Delete rooms successfully" })

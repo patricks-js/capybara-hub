@@ -8,7 +8,7 @@ import {
 } from "@nestjs/common";
 
 import { CustomersService } from "./customers.service";
-import { UpdateCustomerDTO } from "./dto/update-customer.dto";
+import { UpdateCustomerDto } from "./dto/update-customer.dto";
 
 @Controller("customers")
 export class CustomersController {
@@ -18,8 +18,8 @@ export class CustomersController {
   @HttpCode(HttpStatus.NO_CONTENT)
   updateProfile(
     @Param("id") id: string,
-    @Body() updateCustomerDTO: UpdateCustomerDTO,
+    @Body() updateCustomerDto: UpdateCustomerDto,
   ) {
-    return this.customersService.updateProfile(id, updateCustomerDTO);
+    return this.customersService.updateProfile(id, updateCustomerDto);
   }
 }

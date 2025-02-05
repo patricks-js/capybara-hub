@@ -5,9 +5,9 @@ import {
   IsPhoneNumber,
   IsString,
 } from "class-validator";
-import { CreateHotelAddressDTO } from "./create-hotel-address.dto";
+import { CreateHotelAddressDto } from "./create-hotel-address.dto";
 
-export class CreateHotelDTO {
+export class CreateHotelDto {
   @IsString()
   @IsNotEmpty()
   readonly name: string;
@@ -25,5 +25,5 @@ export class CreateHotelDTO {
 
   @IsNotEmpty()
   @IsObject()
-  readonly address?: CreateHotelAddressDTO;
+  readonly address?: CreateHotelAddressDto;
 }

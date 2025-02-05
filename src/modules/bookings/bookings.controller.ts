@@ -17,8 +17,8 @@ import {
   ApiTags,
 } from "@nestjs/swagger";
 import { BookingsService } from "./bookings.service";
-import { CreateBookingDTO } from "./dto/create-booking.dto";
-import { UpdateBookingDTO } from "./dto/update-booking.dto";
+import { CreateBookingDto } from "./dto/create-booking.dto";
+import { UpdateBookingDto } from "./dto/update-booking.dto";
 import { Booking } from "./entities/booking.entity";
 
 @ApiTags("bookings")
@@ -33,8 +33,8 @@ export class BookingsController {
     type: Booking,
   })
   @ApiForbiddenResponse({ description: "Forbidden." })
-  @ApiBody({ type: CreateBookingDTO })
-  create(@Body() createBookingDTO: CreateBookingDTO) {}
+  @ApiBody({ type: CreateBookingDto })
+  create(@Body() createBookingDto: CreateBookingDto) {}
 
   @Get()
   @ApiOkResponse({
@@ -58,8 +58,8 @@ export class BookingsController {
   @ApiOkResponse({ description: "Update booking successfully" })
   @ApiForbiddenResponse({ description: "Forbidden." })
   @ApiNotFoundResponse({ description: "Not found bookings" })
-  @ApiBody({ type: UpdateBookingDTO })
-  update(@Param("id") id: string, @Body() updateBookingDto: UpdateBookingDTO) {}
+  @ApiBody({ type: UpdateBookingDto })
+  update(@Param("id") id: string, @Body() updateBookingDto: UpdateBookingDto) {}
 
   @Delete(":id")
   @ApiOkResponse({ description: "Delete booking successfully" })

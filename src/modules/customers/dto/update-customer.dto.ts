@@ -1,7 +1,7 @@
 import { IsObject, IsPhoneNumber, IsString } from "class-validator";
-import { UpdateCustomerAddressDTO } from "./update-customer-address.dto";
+import { UpdateCustomerAddressDto } from "./update-customer-address.dto";
 
-export class UpdateCustomerDTO {
+export class UpdateCustomerDto {
   @IsString()
   readonly name?: string;
 
@@ -9,5 +9,5 @@ export class UpdateCustomerDTO {
   readonly phone?: string;
 
   @IsObject()
-  readonly address?: UpdateCustomerAddressDTO;
+  readonly address?: UpdateCustomerAddressDto;
 }

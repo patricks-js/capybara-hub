@@ -16,8 +16,8 @@ import {
   ApiOkResponse,
   ApiTags,
 } from "@nestjs/swagger";
-import { CreateHotelDTO } from "../hotels/dto/create-hotel.dto";
-import { UpdateHotelDTO } from "../hotels/dto/update-hotel.dto";
+import { CreateHotelDto } from "../hotels/dto/create-hotel.dto";
+import { UpdateHotelDto } from "../hotels/dto/update-hotel.dto";
 import { Hotel } from "../hotels/entity/hotel.entity";
 
 @ApiTags("hotel")
@@ -30,8 +30,8 @@ export class HotelController {
     type: Hotel,
   })
   @ApiForbiddenResponse({ description: "Forbidden." })
-  @ApiBody({ type: CreateHotelDTO })
-  create(@Body() createHotelDto: CreateHotelDTO) {}
+  @ApiBody({ type: CreateHotelDto })
+  create(@Body() createHotelDto: CreateHotelDto) {}
 
   @Get()
   @ApiOkResponse({ description: "Get All hotel successfully", type: [Hotel] })
@@ -49,8 +49,8 @@ export class HotelController {
   @ApiOkResponse({ description: "Update hotel successfully" })
   @ApiForbiddenResponse({ description: "Forbidden." })
   @ApiNotFoundResponse({ description: "Not found hotel" })
-  @ApiBody({ type: UpdateHotelDTO })
-  update(@Param("id") id: string, @Body() updateHotelDto: UpdateHotelDTO) {}
+  @ApiBody({ type: UpdateHotelDto })
+  update(@Param("id") id: string, @Body() updateHotelDto: UpdateHotelDto) {}
 
   @Delete(":id")
   @ApiOkResponse({ description: "Delete hotel successfully" })
