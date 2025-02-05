@@ -1,6 +1,6 @@
 {
   "version": "1",
-  "name": "Capybara Hotel Collection",
+  "name": "Capybara Hub",
   "type": "collection",
   "ignore": ["node_modules", ".git"]
 }
