@@ -2,8 +2,8 @@ import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 
-import { CreateCustomerDTO } from "./dto/create-customer.dto";
-import { UpdateCustomerDTO } from "./dto/update-customer.dto";
+import { CreateCustomerDto } from "./dto/create-customer.dto";
+import { UpdateCustomerDto } from "./dto/update-customer.dto";
 import { Customer } from "./entities/customer.entity";
 
 /**
@@ -19,17 +19,17 @@ export class CustomersService {
     @InjectModel(Customer.name) private readonly customerModel: Model<Customer>,
   ) {}
 
-  async create(createCustomerDTO: CreateCustomerDTO) {
-    await this.customerModel.create(createCustomerDTO);
+  async create(createCustomerDto: CreateCustomerDto) {
+    await this.customerModel.create(createCustomerDto);
   }
 
   async getByEmail(email: string) {
     return this.customerModel.findOne({ email }).exec();
   }
 
-  async updateProfile(id: string, updateCustomerDTO: UpdateCustomerDTO) {
+  async updateProfile(id: string, updateCustomerDto: UpdateCustomerDto) {
     const customer = await this.customerModel
-      .findByIdAndUpdate(id, updateCustomerDTO)
+      .findByIdAndUpdate(id, updateCustomerDto)
       .exec();
 
     if (!customer) throw new NotFoundException("Customer not found");

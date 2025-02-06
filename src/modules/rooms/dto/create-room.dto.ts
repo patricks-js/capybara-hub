@@ -1,7 +1,7 @@
 import { IsDecimal, IsEnum, IsMongoId, IsPositive } from "class-validator";
-import { roomStatuses } from "../entities/room.entity";
+import { RoomStatus } from "../entities/room.entity";
 
-export class CreateRoomDTO {
+export class CreateRoomDto {
   @IsMongoId()
   hotelId: string;
 
@@ -14,6 +14,6 @@ export class CreateRoomDTO {
   @IsPositive()
   roomNumber: number;
 
-  @IsEnum(roomStatuses)
+  @IsEnum(RoomStatus)
   status: string;
 }

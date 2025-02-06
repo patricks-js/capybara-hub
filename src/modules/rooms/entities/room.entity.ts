@@ -3,7 +3,11 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { HydratedDocument, Types } from "mongoose";
 import { RoomType } from "./room-type.entity";
 
-export const roomStatuses = ["available", "occupied", "maintenance"] as const;
+export enum RoomStatus {
+  AVAILABLE = "available",
+  OCCUPIED = "occupied",
+  MAINTENANCE = "maintenance",
+}
 
 @Schema({ collection: "rooms", versionKey: false })
 export class Room {
@@ -19,7 +23,7 @@ export class Room {
   @Prop({ required: true })
   roomNumber: number;
 
-  @Prop({ required: true, enum: roomStatuses })
+  @Prop({ required: true, enum: RoomStatus })
   status: string;
 }
 

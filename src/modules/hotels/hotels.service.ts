@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
-import { CreateHotelDTO } from "./dto/create-hotel.dto";
+import { CreateHotelDto } from "./dto/create-hotel.dto";
 import { Hotel } from "./entity/hotel.entity";
 
 /**
@@ -18,7 +18,7 @@ export class HotelsService {
     @InjectModel(Hotel.name) private readonly hotelModel: Model<Hotel>,
   ) {}
 
-  async create(createHotelDTO: CreateHotelDTO) {
-    await this.hotelModel.create(createHotelDTO);
+  async create(createHotelDto: CreateHotelDto) {
+    await this.hotelModel.create(createHotelDto);
   }
 }

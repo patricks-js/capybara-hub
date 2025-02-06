@@ -1,6 +1,7 @@
 {
-  "name": "@capybara-hotel/backend",
-  "version": "0.0.1",
+  "name": "@capybara-hub/backend",
+  "version": "0.1.0",
+  "description": "Capybara Hub System Management API",
   "private": true,
   "scripts": {
     "build": "nest build",
@@ -25,6 +26,7 @@
     "@nestjs/mongoose": "^11.0.1",
     "@nestjs/platform-express": "^11.0.7",
     "@nestjs/swagger": "^11.0.3",
+    "@scalar/nestjs-api-reference": "^0.3.180",
     "bcryptjs": "^2.4.3",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",

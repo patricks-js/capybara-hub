@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsNumber, IsPostalCode, IsString } from "class-validator";
 
-export class CreateHotelAddressDTO {
+export class CreateHotelAddressDto {
   @IsString({ message: "This is not a valid street" })
   @IsNotEmpty()
   street: string;

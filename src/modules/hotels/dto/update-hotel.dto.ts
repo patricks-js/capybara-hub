@@ -1,10 +1,4 @@
-import { IsObject, IsPhoneNumber } from "class-validator";
-import { UpdateHotelAddressDTO } from "./update-hotel-address.dto";
+import { PartialType } from "@nestjs/swagger";
+import { CreateHotelDto } from "./create-hotel.dto";
 
-export class UpdateHotelDTO {
-  @IsPhoneNumber("BR")
-  readonly phone?: string;
-
-  @IsObject()
-  readonly address?: UpdateHotelAddressDTO;
-}
+export class UpdateHotelDto extends PartialType(CreateHotelDto) {}

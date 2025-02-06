@@ -5,10 +5,9 @@ import {
   IsMongoId,
   IsNotEmpty,
 } from "class-validator";
-
 import { BookingStatus } from "../entities/booking.entity";
 
-export class CreateBookingDTO {
+export class CreateBookingDto {
   @IsMongoId()
   @IsNotEmpty()
   customerId: string;

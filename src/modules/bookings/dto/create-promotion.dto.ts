@@ -1,6 +1,6 @@
 import { IsDateString, IsDecimal, IsNotEmpty, IsString } from "class-validator";
 
-export class CreatePromotionDTO {
+export class CreatePromotionDto {
   @IsString()
   @IsNotEmpty()
   title: string;

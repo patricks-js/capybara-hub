@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 
-import { CreateRoomDTO } from "./dto/create-room.dto";
+import { CreateRoomDto } from "./dto/create-room.dto";
 import { Room } from "./entities/room.entity";
 
 /**
@@ -20,11 +20,11 @@ import { Room } from "./entities/room.entity";
 export class RoomsService {
   constructor(@InjectModel(Room.name) private roomModel: Model<Room>) {}
 
-  async create(createRoomDTO: CreateRoomDTO) {
+  async create(createRoomDto: CreateRoomDto) {
     await this.roomModel.create({
-      ...createRoomDTO,
-      hotel: createRoomDTO.hotelId,
-      roomType: createRoomDTO.roomTypeId,
+      ...createRoomDto,
+      hotel: createRoomDto.hotelId,
+      roomType: createRoomDto.roomTypeId,
     });
   }
 }

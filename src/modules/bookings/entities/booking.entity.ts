@@ -7,10 +7,10 @@ import { Room } from "@/modules/rooms/entities/room.entity";
 import { Promotion, PromotionSchema } from "./promotion.entity";
 
 export enum BookingStatus {
-  PENDING = "Pending",
-  CONFIRMED = "Confirmed",
-  COMPLETED = "Completed",
-  CANCELLED = "Cancelled",
+  PENDING = "pending",
+  CONFIRMED = "confirmed",
+  COMPLETED = "completed",
+  CANCELLED = "cancelled",
 }
 
 @Schema({ collection: "bookings", timestamps: true, versionKey: false })
