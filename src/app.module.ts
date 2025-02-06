@@ -2,7 +2,6 @@ import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { APP_GUARD } from "@nestjs/core";
 import { MongooseModule } from "@nestjs/mongoose";
-import { config } from "dotenv";
 import { LoggerModule } from "nestjs-pino";
 import { AuthGuard } from "./common/guards/auth.guard";
 import { PinoLoggerService } from "./logging/pino-logger";
@@ -12,14 +11,11 @@ import { CustomersModule } from "./modules/customers/customers.module";
 import { HotelsModule } from "./modules/hotels/hotels.module";
 import { RoomsModule } from "./modules/rooms/rooms.module";
 
-config({
-  path: ".env.local",
-});
-
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+      envFilePath: ".env.local",
     }),
     LoggerModule.forRoot({
       pinoHttp: {
