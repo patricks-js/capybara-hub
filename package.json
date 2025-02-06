@@ -1,6 +1,7 @@
 {
   "name": "@capybara-hub/backend",
   "version": "0.1.0",
+  "description": "Capybara Hub System Management API",
   "private": true,
   "scripts": {
     "build": "nest build",
