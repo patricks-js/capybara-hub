@@ -4,7 +4,7 @@ import { APP_GUARD } from "@nestjs/core";
 import { MongooseModule } from "@nestjs/mongoose";
 import { LoggerModule } from "nestjs-pino";
 import { AuthGuard } from "./common/guards/auth.guard";
-import { PinoLoggerService } from "./logging/pino-logger";
+import { PinoLoggerService } from "./config/pino-logger.config";
 import { AuthModule } from "./modules/auth/auth.module";
 import { BookingsModule } from "./modules/bookings/bookings.module";
 import { CustomersModule } from "./modules/customers/customers.module";
