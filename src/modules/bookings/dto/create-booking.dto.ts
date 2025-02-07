@@ -1,3 +1,4 @@
+import { ApiProperty } from "@nestjs/swagger";
 import {
   IsDateString,
   IsDecimal,
@@ -8,30 +9,56 @@ import {
 import { BookingStatus } from "../entities/booking.entity";
 
 export class CreateBookingDto {
+  @ApiProperty({
+    description: "Customer ID",
+  })
   @IsMongoId()
   @IsNotEmpty()
   customerId: string;
 
+  @ApiProperty({
+    description: "Hotel ID",
+  })
   @IsMongoId()
   @IsNotEmpty()
   hotelId: string;
 
+  @ApiProperty({
+    description: "Room ID",
+  })
   @IsMongoId()
   @IsNotEmpty()
   roomId: string;
 
+  @ApiProperty({
+    description: "Check-in date",
+    example: "2025-09-10",
+  })
   @IsDateString()
   @IsNotEmpty()
   checkInDate: string;
 
+  @ApiProperty({
+    description: "Check-out date",
+    example: "2025-09-15",
+  })
   @IsDateString()
   @IsNotEmpty()
   checkoutDate: string;
 
+  @ApiProperty({
+    description: "Total price",
+    example: "1000.00",
+  })
   @IsDecimal()
   @IsNotEmpty()
   totalPrice: string;
 
+  @ApiProperty({
+    description: "Booking status",
+    enum: BookingStatus,
+    example: BookingStatus.PENDING,
+  })
   @IsEnum(BookingStatus)
   @IsNotEmpty()
   status: string;

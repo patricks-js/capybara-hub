@@ -1,19 +1,35 @@
+import { ApiProperty } from "@nestjs/swagger";
 import { IsDecimal, IsEnum, IsMongoId, IsPositive } from "class-validator";
 import { RoomStatus } from "../entities/room.entity";
 
 export class CreateRoomDto {
+  @ApiProperty({ description: "Hotel ID" })
   @IsMongoId()
-  hotelId: string;
+  readonly hotelId: string;
 
+  @ApiProperty({ description: "Room type ID" })
   @IsMongoId()
-  roomTypeId: string;
+  readonly roomTypeId: string;
 
+  @ApiProperty({
+    description: "Price per night for the room",
+    example: "150.00",
+  })
   @IsDecimal()
-  pricePerNight: string;
+  readonly pricePerNight: string;
 
+  @ApiProperty({
+    description: "Room number in the hotel",
+    example: 101,
+  })
   @IsPositive()
-  roomNumber: number;
+  readonly roomNumber: number;
 
+  @ApiProperty({
+    description: "Current status of the room",
+    enum: RoomStatus,
+    example: RoomStatus.AVAILABLE,
+  })
   @IsEnum(RoomStatus)
-  status: string;
+  readonly status: string;
 }
