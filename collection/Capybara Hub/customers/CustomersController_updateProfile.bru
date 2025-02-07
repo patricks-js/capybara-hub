@@ -5,20 +5,14 @@ meta {
 }
 
 put {
-  url: {{baseUrl}}/api/customers/:id
+  url: {{baseUrl}}/api/customers/me
   body: json
-  auth: none
-}
-
-params:path {
-  id: 
+  auth: inherit
 }
 
 body:json {
   {
-    "name": "",
-    "email": "",
-    "password": "",
-    "phone": ""
+    "name": "Hadja Costa",
+    "phone": "81988880021"
   }
 }

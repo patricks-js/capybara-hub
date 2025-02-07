@@ -1,0 +1,23 @@
+meta {
+  name: Update current customer address
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{baseUrl}}/api/customers/address
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "street": "Avenida São Paulo",
+    "number": 1000,
+    "postalCode": "01310-100",
+    "state": "SP",
+    "city": "São Paulo",
+    "country": "Brasil"
+  }
+  
+}
