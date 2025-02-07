@@ -1,0 +1,21 @@
+meta {
+  name: RoomsController_create
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/api/rooms
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "hotelId": "",
+    "roomTypeId": "",
+    "pricePerNight": "",
+    "roomNumber": "",
+    "status": ""
+  }
+}

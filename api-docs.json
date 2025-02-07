@@ -1,181 +1,85 @@
 {
   "openapi": "3.0.0",
   "paths": {
-    "/api/bookings": {
+    "/api/auth/signup": {
       "post": {
-        "operationId": "BookingsController_create",
+        "operationId": "AuthController_signup",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateBookingDto"
-              }
+              "schema": { "$ref": "#/components/schemas/SignupDto" }
             }
           }
         },
         "responses": {
-          "201": {
-            "description": "The record has been successfully created.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Booking"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden."
-          }
+          "201": { "description": "Customer created successfully" },
+          "409": { "description": "Customer already exists" }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
-        "tags": ["bookings"]
-      },
-      "get": {
-        "operationId": "BookingsController_findAll",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Get All bookings successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Booking"
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden."
-          },
-          "404": {
-            "description": "Not found bookings"
-          }
-        },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
-        "tags": ["bookings"]
+        "summary": "Signup customer",
+        "tags": ["auth"]
       }
     },
-    "/api/bookings/{id}": {
-      "get": {
-        "operationId": "BookingsController_findOne",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
+    "/api/auth/signin": {
+      "post": {
+        "operationId": "AuthController_signin",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/SigninDto" }
             }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Get booking by id successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Booking"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden."
-          },
-          "404": {
-            "description": "Not found bookings"
           }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
-        "tags": ["bookings"]
-      },
-      "patch": {
-        "operationId": "BookingsController_update",
+        "responses": {
+          "200": { "description": "Customer signed in successfully" },
+          "401": { "description": "Invalid credentials" }
+        },
+        "summary": "Signin customer",
+        "tags": ["auth"]
+      }
+    },
+    "/api/customers/{id}": {
+      "put": {
+        "operationId": "CustomersController_updateProfile",
         "parameters": [
           {
             "name": "id",
             "required": true,
             "in": "path",
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateBookingDto"
-              }
+              "schema": { "$ref": "#/components/schemas/UpdateCustomerDto" }
             }
           }
         },
         "responses": {
-          "200": {
-            "description": "Update booking successfully"
-          },
-          "403": {
-            "description": "Forbidden."
-          },
-          "404": {
-            "description": "Not found bookings"
-          }
+          "200": { "description": "Update profile successfully" }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
-        "tags": ["bookings"]
-      },
-      "delete": {
-        "operationId": "BookingsController_remove",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
+        "tags": ["customers"]
+      }
+    },
+    "/api/hotels": {
+      "post": {
+        "operationId": "HotelsController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateHotelDto" }
             }
           }
-        ],
-        "responses": {
-          "200": {
-            "description": "Delete booking successfully"
-          },
-          "403": {
-            "description": "Forbidden."
-          },
-          "404": {
-            "description": "Not found bookings"
-          }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
-        "tags": ["bookings"]
+        "responses": { "201": { "description": "" } },
+        "tags": ["hotels"]
       }
     },
     "/api/rooms": {
@@ -186,9 +90,7 @@
           "required": true,
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateRoomDto"
-              }
+              "schema": { "$ref": "#/components/schemas/CreateRoomDto" }
             }
           }
         },
@@ -197,21 +99,12 @@
             "description": "The record has been successfully created.",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Room"
-                }
+                "schema": { "$ref": "#/components/schemas/Room" }
               }
             }
           },
-          "403": {
-            "description": "Forbidden."
-          }
+          "403": { "description": "Forbidden." }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
         "tags": ["rooms"]
       },
       "get": {
@@ -224,25 +117,14 @@
               "application/json": {
                 "schema": {
                   "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Room"
-                  }
+                  "items": { "$ref": "#/components/schemas/Room" }
                 }
               }
             }
           },
-          "403": {
-            "description": "Forbidden."
-          },
-          "404": {
-            "description": "Not found rooms"
-          }
+          "403": { "description": "Forbidden." },
+          "404": { "description": "Not found rooms" }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
         "tags": ["rooms"]
       }
     },
@@ -254,9 +136,7 @@
             "name": "id",
             "required": true,
             "in": "path",
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
         "responses": {
@@ -264,24 +144,13 @@
             "description": "Get rooms by id successfully",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Room"
-                }
+                "schema": { "$ref": "#/components/schemas/Room" }
               }
             }
           },
-          "403": {
-            "description": "Forbidden."
-          },
-          "404": {
-            "description": "Not found rooms"
-          }
+          "403": { "description": "Forbidden." },
+          "404": { "description": "Not found rooms" }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
         "tags": ["rooms"]
       },
       "patch": {
@@ -291,9 +160,7 @@
             "name": "id",
             "required": true,
             "in": "path",
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
         "requestBody": {
@@ -302,29 +169,16 @@
             "application/json": {
               "schema": {
                 "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/CreateRoomDto"
-                }
+                "items": { "$ref": "#/components/schemas/CreateRoomDto" }
               }
             }
           }
         },
         "responses": {
-          "200": {
-            "description": "Update rooms successfully"
-          },
-          "403": {
-            "description": "Forbidden."
-          },
-          "404": {
-            "description": "Not found rooms"
-          }
+          "200": { "description": "Update rooms successfully" },
+          "403": { "description": "Forbidden." },
+          "404": { "description": "Not found rooms" }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
         "tags": ["rooms"]
       },
       "delete": {
@@ -334,41 +188,26 @@
             "name": "id",
             "required": true,
             "in": "path",
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Delete rooms successfully"
-          },
-          "403": {
-            "description": "Forbidden."
-          },
-          "404": {
-            "description": "Not found rooms"
-          }
+          "200": { "description": "Delete rooms successfully" },
+          "403": { "description": "Forbidden." },
+          "404": { "description": "Not found rooms" }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
         "tags": ["rooms"]
       }
     },
-    "/api/hotel": {
+    "/api/bookings": {
       "post": {
-        "operationId": "HotelController_create",
+        "operationId": "BookingsController_create",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateHotelDto"
-              }
+              "schema": { "$ref": "#/components/schemas/CreateBookingDto" }
             }
           }
         },
@@ -377,375 +216,111 @@
             "description": "The record has been successfully created.",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Hotel"
-                }
+                "schema": { "$ref": "#/components/schemas/Booking" }
               }
             }
           },
-          "403": {
-            "description": "Forbidden."
-          }
+          "403": { "description": "Forbidden." }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
-        "tags": ["hotel"]
+        "tags": ["bookings"]
       },
       "get": {
-        "operationId": "HotelController_findAll",
+        "operationId": "BookingsController_findAll",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Get All hotel successfully",
+            "description": "Get All bookings successfully",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Hotel"
-                  }
+                  "items": { "$ref": "#/components/schemas/Booking" }
                 }
               }
             }
           },
-          "403": {
-            "description": "Forbidden."
-          },
-          "404": {
-            "description": "Not found hotel"
-          }
+          "403": { "description": "Forbidden." },
+          "404": { "description": "Not found bookings" }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
-        "tags": ["hotel"]
+        "tags": ["bookings"]
       }
     },
-    "/api/hotel/{id}": {
+    "/api/bookings/{id}": {
       "get": {
-        "operationId": "HotelController_findOne",
+        "operationId": "BookingsController_findOne",
         "parameters": [
           {
             "name": "id",
             "required": true,
             "in": "path",
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
         "responses": {
           "200": {
-            "description": "Get hotel by id successfully",
+            "description": "Get booking by id successfully",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Hotel"
-                }
+                "schema": { "$ref": "#/components/schemas/Booking" }
               }
             }
           },
-          "403": {
-            "description": "Forbidden."
-          },
-          "404": {
-            "description": "Not found hotel"
-          }
+          "403": { "description": "Forbidden." },
+          "404": { "description": "Not found bookings" }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
-        "tags": ["hotel"]
+        "tags": ["bookings"]
       },
       "patch": {
-        "operationId": "HotelController_update",
+        "operationId": "BookingsController_update",
         "parameters": [
           {
             "name": "id",
             "required": true,
             "in": "path",
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateHotelDto"
-              }
+              "schema": { "$ref": "#/components/schemas/UpdateBookingDto" }
             }
           }
         },
         "responses": {
-          "200": {
-            "description": "Update hotel successfully"
-          },
-          "403": {
-            "description": "Forbidden."
-          },
-          "404": {
-            "description": "Not found hotel"
-          }
+          "200": { "description": "Update booking successfully" },
+          "403": { "description": "Forbidden." },
+          "404": { "description": "Not found bookings" }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
-        "tags": ["hotel"]
+        "tags": ["bookings"]
       },
       "delete": {
-        "operationId": "HotelController_remove",
+        "operationId": "BookingsController_remove",
         "parameters": [
           {
             "name": "id",
             "required": true,
             "in": "path",
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Delete hotel successfully"
-          },
-          "403": {
-            "description": "Forbidden."
-          },
-          "404": {
-            "description": "Not found hotel"
-          }
+          "200": { "description": "Delete booking successfully" },
+          "403": { "description": "Forbidden." },
+          "404": { "description": "Not found bookings" }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
-        "tags": ["hotel"]
-      }
-    },
-    "/api/users": {
-      "post": {
-        "operationId": "UserController_create",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateUserDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "The record has been successfully created.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                }
-              }
-            }
-          }
-        },
-        "tags": ["user"]
-      },
-      "get": {
-        "operationId": "UserController_findAll",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Get All users successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/User"
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden."
-          },
-          "404": {
-            "description": "Not found users"
-          }
-        },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
-        "tags": ["user"]
-      }
-    },
-    "/api/users/login": {
-      "post": {
-        "operationId": "UserController_login",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                }
-              }
-            }
-          }
-        },
-        "tags": ["user"]
-      }
-    },
-    "/api/users/{id}": {
-      "get": {
-        "operationId": "UserController_findOne",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Get user by id successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden."
-          },
-          "404": {
-            "description": "Not found user"
-          }
-        },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
-        "tags": ["user"]
-      },
-      "patch": {
-        "operationId": "UserController_update",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateUserDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Update user successfully"
-          },
-          "403": {
-            "description": "Forbidden."
-          },
-          "404": {
-            "description": "Not found user"
-          }
-        },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
-        "tags": ["user"]
-      },
-      "delete": {
-        "operationId": "UserController_remove",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Delete user successfully"
-          },
-          "403": {
-            "description": "Forbidden."
-          },
-          "404": {
-            "description": "Not found user"
-          }
-        },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
-        "tags": ["user"]
+        "tags": ["bookings"]
       }
     }
   },
   "info": {
     "title": "Capybara Hub",
-    "description": "Capybara Hub Hotel System Management API",
-    "version": "0.0.1",
+    "description": "Capybara Hub System Management API",
+    "version": "0.1.0",
     "contact": {}
   },
-  "tags": [
-    {
-      "name": "CapybaraHub",
-      "description": ""
-    }
-  ],
+  "tags": [{ "name": "Capybara Hub", "description": "" }],
   "servers": [],
   "components": {
     "securitySchemes": {
@@ -758,233 +333,212 @@
       }
     },
     "schemas": {
-      "CreateBookingDto": {
+      "SignupDto": {
         "type": "object",
         "properties": {
-          "user_id": {
-            "type": "string"
+          "name": {
+            "type": "string",
+            "description": "Customer full name",
+            "example": "John Doe"
           },
-          "room_id": {
-            "type": "string"
+          "email": {
+            "type": "string",
+            "description": "Customer email address",
+            "example": "john.doe@example.com"
           },
-          "check_in_date": {
-            "type": "string"
+          "password": {
+            "type": "string",
+            "description": "Customer password - minimum 8 characters, at least one uppercase letter, one lowercase letter, one number, and one special character",
+            "example": "Password123@"
           },
-          "check_out_date": {
-            "type": "string"
+          "phone": {
+            "type": "string",
+            "description": "Customer BR phone number",
+            "example": "+5511999999999"
+          }
+        },
+        "required": ["name", "email", "password"]
+      },
+      "SigninDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Customer email address",
+            "example": "john.doe@gmail.com"
           },
-          "total_price": {
-            "type": "number"
+          "password": {
+            "type": "string",
+            "description": "Customer password",
+            "example": "Password123@"
+          }
+        },
+        "required": ["email", "password"]
+      },
+      "UpdateCustomerDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Customer full name",
+            "example": "John Doe"
+          },
+          "email": {
+            "type": "string",
+            "description": "Customer email address",
+            "example": "john.doe@example.com"
+          },
+          "password": {
+            "type": "string",
+            "description": "Customer password",
+            "example": "securePassword123"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Customer phone number",
+            "example": "+55 11 98765-4321"
+          }
+        }
+      },
+      "CreateHotelAddressDto": {
+        "type": "object",
+        "properties": {
+          "street": {
+            "type": "string",
+            "description": "Street name",
+            "example": "Avenida Paulista"
+          },
+          "number": {
+            "type": "number",
+            "description": "Street number",
+            "example": 1000
+          },
+          "postalCode": {
+            "type": "string",
+            "description": "Postal code",
+            "example": "01310-100"
+          },
+          "state": {
+            "type": "string",
+            "description": "State",
+            "example": "SP"
+          },
+          "city": {
+            "type": "string",
+            "description": "City",
+            "example": "São Paulo"
+          },
+          "country": {
+            "type": "string",
+            "description": "Country",
+            "example": "Brasil"
           }
         },
         "required": [
-          "user_id",
-          "room_id",
-          "check_in_date",
-          "check_out_date",
-          "total_price"
-        ]
-      },
-      "Booking": {
-        "type": "object",
-        "properties": {
-          "user_id": {
-            "type": "string"
-          },
-          "room_id": {
-            "type": "string"
-          },
-          "hotel_id": {
-            "type": "string"
-          },
-          "check_in_date": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "check_out_date": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "total_price": {
-            "type": "number"
-          },
-          "status": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "user_id",
-          "room_id",
-          "hotel_id",
-          "check_in_date",
-          "check_out_date",
-          "total_price",
-          "status"
-        ]
-      },
-      "CreateRoomDto": {
-        "type": "object",
-        "properties": {
-          "hotel_id": {
-            "type": "string"
-          },
-          "room_number": {
-            "type": "string"
-          },
-          "room_type": {
-            "type": "string"
-          },
-          "price_per_night": {
-            "type": "number"
-          }
-        },
-        "required": ["hotel_id", "room_number", "room_type", "price_per_night"]
-      },
-      "Room": {
-        "type": "object",
-        "properties": {
-          "hotel_id": {
-            "type": "string"
-          },
-          "room_type": {
-            "type": "string"
-          },
-          "room_number": {
-            "type": "string"
-          },
-          "price_per_night": {
-            "type": "number"
-          },
-          "is_available": {
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "hotel_id",
-          "room_type",
-          "room_number",
-          "price_per_night",
-          "is_available"
+          "street",
+          "number",
+          "postalCode",
+          "state",
+          "city",
+          "country"
         ]
       },
       "CreateHotelDto": {
         "type": "object",
         "properties": {
           "name": {
-            "type": "string"
+            "type": "string",
+            "description": "Hotel name",
+            "example": "Grand Capybara Hotel"
           },
-          "description": {
-            "type": "string"
+          "email": {
+            "type": "string",
+            "description": "Hotel business email",
+            "example": "contact@capybarahub.com"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Hotel contact phone number",
+            "example": "+5511999999999"
           },
           "address": {
-            "type": "string"
+            "description": "Hotel address details",
+            "allOf": [{ "$ref": "#/components/schemas/CreateHotelAddressDto" }]
+          }
+        },
+        "required": ["name", "email", "phone"]
+      },
+      "CreateRoomDto": {
+        "type": "object",
+        "properties": {
+          "hotelId": { "type": "string", "description": "Hotel ID" },
+          "roomTypeId": { "type": "string", "description": "Room type ID" },
+          "pricePerNight": {
+            "type": "string",
+            "description": "Price per night for the room",
+            "example": "150.00"
           },
-          "city": {
-            "type": "string"
+          "roomNumber": {
+            "type": "number",
+            "description": "Room number in the hotel",
+            "example": 101
           },
-          "state": {
-            "type": "string"
-          },
-          "zip_code": {
-            "type": "string"
-          },
-          "phone_number": {
-            "type": "string"
+          "status": {
+            "type": "string",
+            "description": "Current status of the room",
+            "enum": ["available", "occupied", "maintenance"],
+            "example": "available"
           }
         },
         "required": [
-          "name",
-          "description",
-          "address",
-          "city",
-          "state",
-          "zip_code",
-          "phone_number"
+          "hotelId",
+          "roomTypeId",
+          "pricePerNight",
+          "roomNumber",
+          "status"
         ]
       },
-      "Hotel": {
+      "Room": { "type": "object", "properties": {} },
+      "CreateBookingDto": {
         "type": "object",
         "properties": {
-          "name": {
-            "type": "string"
+          "customerId": { "type": "string", "description": "Customer ID" },
+          "hotelId": { "type": "string", "description": "Hotel ID" },
+          "roomId": { "type": "string", "description": "Room ID" },
+          "checkInDate": {
+            "type": "string",
+            "description": "Check-in date",
+            "example": "2025-09-10"
           },
-          "description": {
-            "type": "string"
+          "checkoutDate": {
+            "type": "string",
+            "description": "Check-out date",
+            "example": "2025-09-15"
           },
-          "address": {
-            "type": "string"
+          "totalPrice": {
+            "type": "string",
+            "description": "Total price",
+            "example": "1000.00"
           },
-          "city": {
-            "type": "string"
-          },
-          "state": {
-            "type": "string"
-          },
-          "zip_code": {
-            "type": "string"
-          },
-          "phone_number": {
-            "type": "string"
+          "status": {
+            "type": "string",
+            "description": "Booking status",
+            "enum": ["pending", "confirmed", "completed", "cancelled"],
+            "example": "pending"
           }
         },
         "required": [
-          "name",
-          "description",
-          "address",
-          "city",
-          "state",
-          "zip_code",
-          "phone_number"
+          "customerId",
+          "hotelId",
+          "roomId",
+          "checkInDate",
+          "checkoutDate",
+          "totalPrice",
+          "status"
         ]
       },
-      "CreateUserDto": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "email": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
-          },
-          "phone": {
-            "type": "string"
-          }
-        },
-        "required": ["name", "email", "password", "phone"]
-      },
-      "User": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "email": {
-            "type": "string"
-          },
-          "password_hash": {
-            "type": "string"
-          },
-          "phone": {
-            "type": "string"
-          }
-        },
-        "required": ["name", "email", "password_hash", "phone"]
-      },
-      "LoginDto": {
-        "type": "object",
-        "properties": {
-          "email": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
-          }
-        },
-        "required": ["email", "password"]
-      }
+      "Booking": { "type": "object", "properties": {} },
+      "UpdateBookingDto": { "type": "object", "properties": {} }
     }
   }
 }

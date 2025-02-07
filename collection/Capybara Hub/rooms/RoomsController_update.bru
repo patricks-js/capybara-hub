@@ -1,0 +1,27 @@
+meta {
+  name: RoomsController_update
+  type: http
+  seq: 4
+}
+
+patch {
+  url: {{baseUrl}}/api/rooms/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+body:json {
+  [
+    {
+      "hotelId": "",
+      "roomTypeId": "",
+      "pricePerNight": "",
+      "roomNumber": "",
+      "status": ""
+    }
+  ]
+}

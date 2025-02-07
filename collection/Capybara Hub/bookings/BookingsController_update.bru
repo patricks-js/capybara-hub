@@ -1,0 +1,19 @@
+meta {
+  name: BookingsController_update
+  type: http
+  seq: 4
+}
+
+patch {
+  url: {{baseUrl}}/api/bookings/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+body:json {
+  {}
+}

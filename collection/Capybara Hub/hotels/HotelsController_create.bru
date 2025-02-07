@@ -1,0 +1,20 @@
+meta {
+  name: HotelsController_create
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/api/hotels
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "",
+    "email": "",
+    "phone": "",
+    "address": ""
+  }
+}

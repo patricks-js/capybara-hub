@@ -1,0 +1,18 @@
+meta {
+  name: Signin customer
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/auth/signin
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "",
+    "password": ""
+  }
+}
