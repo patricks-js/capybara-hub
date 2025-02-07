@@ -19,8 +19,12 @@ export class CustomersService {
     @InjectModel(Customer.name) private readonly customerModel: Model<Customer>,
   ) {}
 
-  async create(createCustomerDto: CreateCustomerDto) {
-    await this.customerModel.create(createCustomerDto);
+  async create(createCustomerDto: CreateCustomerDto): Promise<{ id: string }> {
+    const createdCustomer = await this.customerModel.create(createCustomerDto);
+
+    return {
+      id: createdCustomer.id,
+    };
   }
 
   async getByEmail(email: string) {

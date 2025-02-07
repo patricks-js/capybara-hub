@@ -28,12 +28,18 @@ export class AuthService {
 
     const passwordHash = await bcryptjs.hash(password, 10);
 
-    await this.customersService.create({
+    const { id } = await this.customersService.create({
       name,
       email,
       phone,
       password: passwordHash,
     });
+
+    const accessToken = await this.generateAccessToken({ sub: id, email });
+
+    return {
+      accessToken,
+    };
   }
 
   async signin({ email, password }: SigninDto) {
@@ -46,9 +52,8 @@ export class AuthService {
     if (!isPasswordValid)
       throw new UnauthorizedException("Invalid credentials");
 
-    const accessToken = await this.jwtService.signAsync({
-      sub: customer._id.toString(),
-      name: customer.name,
+    const accessToken = await this.generateAccessToken({
+      sub: customer.id,
       email: customer.email,
     });
 
@@ -56,4 +61,15 @@ export class AuthService {
       accessToken,
     };
   }
+
+  async generateAccessToken({ sub, email }: AuthPayload) {
+    const accessToken = await this.jwtService.signAsync({ sub, email });
+
+    return accessToken;
+  }
+}
+
+interface AuthPayload {
+  sub: string;
+  email: string;
 }
