@@ -7,14 +7,22 @@ meta {
 post {
   url: {{baseUrl}}/api/hotels
   body: json
-  auth: none
+  auth: inherit
 }
 
 body:json {
   {
-    "name": "",
-    "email": "",
-    "phone": "",
-    "address": ""
+    "name": "Grand Capybara Hotel",
+    "email": "contact@capybarahub.com",
+    "phone": "+5511999999999",
+    "address": {
+      "street": "Avenida Paulista",
+      "number": 1000,
+      "postalCode": "01310-100",
+      "state": "SP",
+      "city": "São Paulo",
+      "country": "Brasil"
+    },
+    "image": "https://assets.hyatt.com/content/dam/hyatt/hyattdam/images/2017/08/29/1013/Grand-Hyatt-Rio-de-Janeiro-P443-Pool.jpg/Grand-Hyatt-Rio-de-Janeiro-P443-Pool.16x9.adapt.1920.1080.jpg"
   }
 }

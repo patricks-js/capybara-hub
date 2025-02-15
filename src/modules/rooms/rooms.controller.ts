@@ -1,3 +1,4 @@
+import { PublicRoute } from "@/common/decorators/public-route";
 import {
   Body,
   Controller,
@@ -36,12 +37,14 @@ export class RoomsController {
     return this.roomsService.create(createRoomDto);
   }
 
+  @PublicRoute()
   @Get()
   @ApiOkResponse({ description: "Get All rooms successfully", type: [Room] })
   @ApiForbiddenResponse({ description: "Forbidden." })
   @ApiNotFoundResponse({ description: "Not found rooms" })
   findAll() {}
 
+  @PublicRoute()
   @Get(":id")
   @ApiOkResponse({ description: "Get rooms by id successfully", type: Room })
   @ApiForbiddenResponse({ description: "Forbidden." })
