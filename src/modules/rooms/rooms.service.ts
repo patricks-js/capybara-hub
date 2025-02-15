@@ -27,4 +27,24 @@ export class RoomsService {
       roomType: createRoomDto.roomTypeId,
     });
   }
+
+  async findAll(page = 1, limit = 20) {
+    const skip = (page - 1) * limit;
+    const rooms = await this.roomModel.find().skip(skip).limit(limit).exec();
+
+    const total = await this.roomModel.countDocuments();
+
+    return {
+      data: rooms,
+      pagination: {
+        total,
+        page,
+        pages: Math.ceil(total / limit),
+      },
+    };
+  }
+
+  async findOne(id: string) {
+    return await this.roomModel.findById(id).exec();
+  }
 }
