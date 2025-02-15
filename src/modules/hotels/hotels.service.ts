@@ -59,4 +59,10 @@ export class HotelsService {
       { new: true },
     );
   }
+
+  async findById(id: string) {
+    return this.hotelModel.findOne({
+      _id: id
+    });
+  }
 }

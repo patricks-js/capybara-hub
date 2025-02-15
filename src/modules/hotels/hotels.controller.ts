@@ -56,4 +56,11 @@ export class HotelsController {
   update(@Param("id") id: string, @Body() updateHotelDto: UpdateHotelDto) {
     return this.hotelsService.update(id, updateHotelDto);
   }
+
+  @PublicRoute()
+  @Get(":id")
+  @ApiOperation({ summary: "Find hotels by id" })
+  findById(@Param("id") id: string) {
+    return this.hotelsService.findById(id);
+  }
 }
