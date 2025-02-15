@@ -7,6 +7,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from "@nestjs/common";
 import {
   ApiBody,
@@ -42,14 +43,18 @@ export class RoomsController {
   @ApiOkResponse({ description: "Get All rooms successfully", type: [Room] })
   @ApiForbiddenResponse({ description: "Forbidden." })
   @ApiNotFoundResponse({ description: "Not found rooms" })
-  findAll() {}
+  findAll(@Query("page") page?: number, @Query("limit") limit?: number) {
+    return this.roomsService.findAll(page, limit);
+  }
 
   @PublicRoute()
   @Get(":id")
   @ApiOkResponse({ description: "Get rooms by id successfully", type: Room })
   @ApiForbiddenResponse({ description: "Forbidden." })
   @ApiNotFoundResponse({ description: "Not found rooms" })
-  findOne(@Param("id") id: string) {}
+  findOne(@Param("id") id: string) {
+    return this.roomsService.findOne(id);
+  }
 
   @Patch(":id")
   @ApiOkResponse({ description: "Update rooms successfully" })
