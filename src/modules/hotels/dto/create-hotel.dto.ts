@@ -40,4 +40,12 @@ export class CreateHotelDto {
   @IsNotEmpty()
   @IsObject()
   readonly address?: CreateHotelAddressDto;
+
+  @ApiProperty({
+    description: "Hotel image",
+    example: "https://capybarahub.com/images/hotel-image.jpg",
+  })
+  @IsString()
+  @IsNotEmpty()
+  readonly image: string;
 }

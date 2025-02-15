@@ -14,6 +14,9 @@ export class Hotel {
   @Prop({ required: true })
   phone: string;
 
+  @Prop({ required: true })
+  image: string;
+
   @Prop({ required: true, type: AddressSchema })
   address: Address;
 }

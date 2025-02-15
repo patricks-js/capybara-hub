@@ -25,6 +25,9 @@ export class Room {
 
   @Prop({ required: true, enum: RoomStatus })
   status: string;
+
+  @Prop([String])
+  images: string[];
 }
 
 export const RoomSchema = SchemaFactory.createForClass(Room);

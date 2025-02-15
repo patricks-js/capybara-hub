@@ -32,4 +32,10 @@ export class CreateRoomDto {
   })
   @IsEnum(RoomStatus)
   readonly status: string;
+
+  @ApiProperty({
+    description: "Images of the room",
+    example: ["image1.jpg", "image2.jpg"],
+  })
+  readonly images: string[];
 }
