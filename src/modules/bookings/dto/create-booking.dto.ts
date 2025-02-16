@@ -14,21 +14,21 @@ export class CreateBookingDto {
   })
   @IsMongoId()
   @IsNotEmpty()
-  customerId: string;
+  customer: string;
 
   @ApiProperty({
     description: "Hotel ID",
   })
   @IsMongoId()
   @IsNotEmpty()
-  hotelId: string;
+  hotel: string;
 
   @ApiProperty({
     description: "Room ID",
   })
   @IsMongoId()
   @IsNotEmpty()
-  roomId: string;
+  room: string;
 
   @ApiProperty({
     description: "Check-in date",
