@@ -32,7 +32,9 @@ export class BookingsController {
   })
   @ApiForbiddenResponse({ description: "Forbidden." })
   @ApiBody({ type: CreateBookingDto })
-  create(@Body() createBookingDto: CreateBookingDto) {}
+  create(@Body() createBookingDto: CreateBookingDto) {
+    return this.bookingsService.createBooking(createBookingDto);
+  }
 
   @Get()
   @ApiOkResponse({
