@@ -4,7 +4,7 @@ import {
   UnauthorizedException,
 } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
-import bcryptjs from "bcryptjs";
+import { compare, hash } from "bcryptjs";
 
 import { CustomersService } from "../customers/customers.service";
 import { SigninDto } from "./dto/signin.dto";
@@ -26,7 +26,7 @@ export class AuthService {
 
     if (emailTaken) throw new ConflictException("This email was already taken");
 
-    const passwordHash = await bcryptjs.hash(password, 10);
+    const passwordHash = await hash(password, 10);
 
     const { id } = await this.customersService.create({
       name,
@@ -47,7 +47,7 @@ export class AuthService {
 
     if (!customer) throw new UnauthorizedException("Invalid credentials");
 
-    const isPasswordValid = await bcryptjs.compare(password, customer.password);
+    const isPasswordValid = await compare(password, customer.password);
 
     if (!isPasswordValid)
       throw new UnauthorizedException("Invalid credentials");
