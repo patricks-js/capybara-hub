@@ -16,6 +16,8 @@ import { Booking, BookingStatus } from "./entities/booking.entity";
  * TODO: Implement get booking by hotel
  */
 
+const CANCELLATION_DEADLINE_DAYS = 3;
+
 @Injectable()
 export class BookingsService {
   constructor(
@@ -56,8 +58,13 @@ export class BookingsService {
     const checkInDate = dayjs(bookingToCancel.checkInDate);
     const today = dayjs();
 
-    const isThreeDaysBeforeCheckIn = checkInDate.diff(today, "day");
+    const isThreeDaysBeforeCheckIn =
+      checkInDate.diff(today, "day") > CANCELLATION_DEADLINE_DAYS;
 
-    console.log(isThreeDaysBeforeCheckIn);
+    if (!isThreeDaysBeforeCheckIn) {
+      throw new BadRequestException(
+        `Cannot cancel booking within ${CANCELLATION_DEADLINE_DAYS} days of check-in`,
+      );
+    }
   }
 }
