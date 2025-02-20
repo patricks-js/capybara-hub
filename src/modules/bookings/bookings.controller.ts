@@ -66,6 +66,6 @@ export class BookingsController {
   @ApiForbiddenResponse({ description: "Forbidden." })
   @ApiNotFoundResponse({ description: "Booking not found" })
   cancelBooking(@Param("id") id: string) {
-    this.bookingsService.cancelBooking(id);
+    return this.bookingsService.cancelBooking(id);
   }
 }

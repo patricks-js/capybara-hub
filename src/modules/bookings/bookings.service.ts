@@ -55,6 +55,13 @@ export class BookingsService {
       throw new NotFoundException("Booking not found");
     }
 
+    const isBookingAvailableToCancel =
+      bookingToCancel.status === BookingStatus.PENDING;
+
+    if (!isBookingAvailableToCancel) {
+      throw new BadRequestException("Booking is not available to cancel");
+    }
+
     const checkInDate = dayjs(bookingToCancel.checkInDate);
     const today = dayjs();
 
@@ -66,5 +73,11 @@ export class BookingsService {
         `Cannot cancel booking within ${CANCELLATION_DEADLINE_DAYS} days of check-in`,
       );
     }
+
+    return this.bookingModel.findByIdAndUpdate(
+      bookingId,
+      { status: BookingStatus.CANCELLED },
+      { new: true },
+    );
   }
 }
