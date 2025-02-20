@@ -2,11 +2,9 @@ import { ApiProperty } from "@nestjs/swagger";
 import {
   IsDateString,
   IsDecimal,
-  IsEnum,
   IsMongoId,
   IsNotEmpty,
 } from "class-validator";
-import { BookingStatus } from "../entities/booking.entity";
 
 export class CreateBookingDto {
   @ApiProperty({
@@ -53,13 +51,4 @@ export class CreateBookingDto {
   @IsDecimal()
   @IsNotEmpty()
   totalPrice: string;
-
-  @ApiProperty({
-    description: "Booking status",
-    enum: BookingStatus,
-    example: BookingStatus.PENDING,
-  })
-  @IsEnum(BookingStatus)
-  @IsNotEmpty()
-  status: string;
 }

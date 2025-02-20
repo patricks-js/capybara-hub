@@ -62,8 +62,10 @@ export class BookingsController {
   update(@Param("id") id: string, @Body() updateBookingDto: UpdateBookingDto) {}
 
   @Delete(":id")
-  @ApiOkResponse({ description: "Delete booking successfully" })
+  @ApiOkResponse({ description: "Booking cancellation successfully" })
   @ApiForbiddenResponse({ description: "Forbidden." })
-  @ApiNotFoundResponse({ description: "Not found bookings" })
-  remove(@Param("id") id: string) {}
+  @ApiNotFoundResponse({ description: "Booking not found" })
+  cancelBooking(@Param("id") id: string) {
+    return this.bookingsService.cancelBooking(id);
+  }
 }
