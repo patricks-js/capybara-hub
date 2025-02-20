@@ -9,6 +9,7 @@
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
+    "db:seed": "ts-node -r tsconfig-paths/register src/seed.ts",
     "format": "biome check --write .",
     "lint": "biome lint .",
     "test": "vitest run",
