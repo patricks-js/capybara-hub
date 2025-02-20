@@ -10,8 +10,6 @@ import { CreateBookingDto } from "./dto/create-booking.dto";
 import { Booking, BookingStatus } from "./entities/booking.entity";
 
 /**
- * TODO: Implement create booking
- * TODO: Implement cancel booking
  * TODO: Implement get booking by customer
  * TODO: Implement get booking by hotel
  */
@@ -25,8 +23,40 @@ export class BookingsService {
   ) {}
 
   async createBooking(booking: CreateBookingDto): Promise<Booking> {
+    const customerBookings = await this.bookingModel.find({
+      customer: booking.customer,
+    });
+
     const checkInDate = dayjs(booking.checkInDate);
     const checkoutDate = dayjs(booking.checkoutDate);
+
+    const customerHasBookingInSamePeriod = customerBookings.some((booking) => {
+      if (booking.status === BookingStatus.CANCELLED) return false;
+
+      const bookingCheckInDate = dayjs(booking.checkInDate);
+      const bookingCheckoutDate = dayjs(booking.checkoutDate);
+
+      const checkInIsSameDate = bookingCheckInDate.isSame(checkInDate);
+      const checkoutIsSameDate = bookingCheckoutDate.isSame(checkoutDate);
+
+      const isSameDay = checkInIsSameDate && checkoutIsSameDate;
+
+      const checkInDateIsBeforeCheckoutDate =
+        bookingCheckInDate.isBefore(checkoutDate);
+      const checkoutDateIsAfterCheckInDate =
+        bookingCheckoutDate.isAfter(checkInDate);
+
+      const isSamePeriod =
+        checkInDateIsBeforeCheckoutDate && checkoutDateIsAfterCheckInDate;
+
+      return isSameDay || isSamePeriod;
+    });
+
+    if (customerHasBookingInSamePeriod) {
+      throw new BadRequestException(
+        "You already have a booking in this period",
+      );
+    }
 
     const isCheckInDateBeforeCheckoutDate = checkInDate.isBefore(checkoutDate);
     const isCheckInDateAfterToday = checkInDate.isAfter(dayjs());
