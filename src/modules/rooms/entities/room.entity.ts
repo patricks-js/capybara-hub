@@ -17,6 +17,9 @@ export class Room {
   @Prop({ required: true, type: Types.ObjectId, ref: RoomType.name })
   roomType: Types.ObjectId;
 
+  @Prop({ required: true })
+  name: string;
+
   @Prop({ required: true, type: Types.Decimal128 })
   pricePerNight: Types.Decimal128;
 

@@ -1,5 +1,12 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDecimal, IsEnum, IsMongoId, IsPositive } from "class-validator";
+import {
+  IsDecimal,
+  IsEnum,
+  IsMongoId,
+  IsNotEmpty,
+  IsPositive,
+  IsString,
+} from "class-validator";
 import { RoomStatus } from "../entities/room.entity";
 
 export class CreateRoomDto {
@@ -10,6 +17,14 @@ export class CreateRoomDto {
   @ApiProperty({ description: "Room type ID" })
   @IsMongoId()
   readonly roomTypeId: string;
+
+  @ApiProperty({
+    description: "Room name",
+    example: "Deluxe Suite",
+  })
+  @IsString()
+  @IsNotEmpty()
+  readonly name: string;
 
   @ApiProperty({
     description: "Price per night for the room",
