@@ -1,3 +1,4 @@
+import { CurrentUserId } from "@/common/decorators/current-user-id";
 import {
   Body,
   Controller,
@@ -14,6 +15,7 @@ import {
   ApiNotFoundResponse,
   ApiOkResponse,
   ApiTags,
+  ApiUnauthorizedResponse,
 } from "@nestjs/swagger";
 import { BookingsService } from "./bookings.service";
 import { CreateBookingDto } from "./dto/create-booking.dto";
@@ -38,12 +40,14 @@ export class BookingsController {
 
   @Get()
   @ApiOkResponse({
-    description: "Get All bookings successfully",
+    description: "Get All customer bookings successfully",
     type: [Booking],
   })
-  @ApiForbiddenResponse({ description: "Forbidden." })
+  @ApiUnauthorizedResponse({ description: "Unauthorized" })
   @ApiNotFoundResponse({ description: "Not found bookings" })
-  findAll() {}
+  findAll(@CurrentUserId() customerId: string) {
+    return this.bookingsService.getAllCustomerBookings(customerId);
+  }
 
   @Get(":id")
   @ApiOkResponse({
