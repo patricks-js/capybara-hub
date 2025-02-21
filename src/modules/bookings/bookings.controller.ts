@@ -1,3 +1,4 @@
+import { CurrentUserId } from "@/common/decorators/current-user-id";
 import {
   Body,
   Controller,
@@ -6,6 +7,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from "@nestjs/common";
 import {
   ApiBody,
@@ -14,11 +16,12 @@ import {
   ApiNotFoundResponse,
   ApiOkResponse,
   ApiTags,
+  ApiUnauthorizedResponse,
 } from "@nestjs/swagger";
 import { BookingsService } from "./bookings.service";
 import { CreateBookingDto } from "./dto/create-booking.dto";
 import { UpdateBookingDto } from "./dto/update-booking.dto";
-import { Booking } from "./entities/booking.entity";
+import { Booking, BookingStatus } from "./entities/booking.entity";
 
 @ApiTags("bookings")
 @Controller("bookings")
@@ -38,12 +41,24 @@ export class BookingsController {
 
   @Get()
   @ApiOkResponse({
-    description: "Get All bookings successfully",
+    description: "Get All customer bookings successfully",
     type: [Booking],
   })
-  @ApiForbiddenResponse({ description: "Forbidden." })
+  @ApiUnauthorizedResponse({ description: "Unauthorized" })
   @ApiNotFoundResponse({ description: "Not found bookings" })
-  findAll() {}
+  findAll(
+    @CurrentUserId() customerId: string,
+    @Query("status") status: BookingStatus,
+  ) {
+    if (status) {
+      return this.bookingsService.getCustomerBookingsByStatus(
+        customerId,
+        status,
+      );
+    }
+
+    return this.bookingsService.getAllCustomerBookings(customerId);
+  }
 
   @Get(":id")
   @ApiOkResponse({

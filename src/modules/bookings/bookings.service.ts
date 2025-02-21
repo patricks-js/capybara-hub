@@ -22,6 +22,14 @@ export class BookingsService {
     @InjectModel(Booking.name) private bookingModel: Model<Booking>,
   ) {}
 
+  async getAllCustomerBookings(customerId: string) {
+    return this.bookingModel.find({ customer: customerId });
+  }
+
+  async getCustomerBookingsByStatus(customerId: string, status: BookingStatus) {
+    return this.bookingModel.find({ customer: customerId, status });
+  }
+
   async createBooking(booking: CreateBookingDto): Promise<Booking> {
     const customerBookings = await this.bookingModel.find({
       customer: booking.customer,

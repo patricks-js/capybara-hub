@@ -1,0 +1,19 @@
+meta {
+  name: Get bookings by status
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/api/bookings?status=pending
+  body: none
+  auth: bearer
+}
+
+params:query {
+  status: pending
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N2I3NWJkNzgxZThiOTIwMTMwOTYwZTYiLCJlbWFpbCI6InBhdHJpY2tAZ21haWwuY29tIiwiaWF0IjoxNzQwMTY3NDI5LCJleHAiOjE3NDAyNTM4Mjl9.uAg5sbWQAiO5R2aXmlHj2mG6Kpx8QxgCwVIom2IH_8o
+}
