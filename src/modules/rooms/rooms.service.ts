@@ -33,9 +33,17 @@ export class RoomsService {
     });
   }
 
-  async findAll(page = 1, limit = 20) {
+  async findAll(page = 1, limit = 20, number?: number) {
     const skip = (page - 1) * limit;
-    const rooms = await this.roomModel.find().skip(skip).limit(limit).exec();
+    let rooms = [];
+
+    if (number) {
+      rooms = await this.roomModel.find({ roomNumber: number }).exec();
+
+      return { rooms };
+    }
+
+    rooms = await this.roomModel.find().skip(skip).limit(limit).exec();
 
     const total = await this.roomModel.countDocuments();
 

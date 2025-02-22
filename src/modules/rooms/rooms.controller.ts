@@ -43,8 +43,12 @@ export class RoomsController {
   @ApiOkResponse({ description: "Get All rooms successfully", type: [Room] })
   @ApiForbiddenResponse({ description: "Forbidden." })
   @ApiNotFoundResponse({ description: "Not found rooms" })
-  findAll(@Query("page") page?: number, @Query("limit") limit?: number) {
-    return this.roomsService.findAll(page, limit);
+  findAll(
+    @Query("page") page?: number,
+    @Query("limit") limit?: number,
+    @Query("number") number?: number,
+  ) {
+    return this.roomsService.findAll(page, limit, number);
   }
 
   @PublicRoute()
