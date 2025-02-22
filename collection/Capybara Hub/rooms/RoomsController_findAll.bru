@@ -5,7 +5,11 @@ meta {
 }
 
 get {
-  url: {{baseUrl}}/api/rooms
+  url: {{baseUrl}}/api/rooms?number=101
   body: none
   auth: none
+}
+
+params:query {
+  number: 101
 }

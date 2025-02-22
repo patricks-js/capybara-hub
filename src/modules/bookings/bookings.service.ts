@@ -118,4 +118,8 @@ export class BookingsService {
       { new: true },
     );
   }
+
+  async getAllBookingsByRoom(roomId: string) {
+    return this.bookingModel.find({ room: roomId });
+  }
 }
