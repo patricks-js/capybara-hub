@@ -56,6 +56,13 @@ export class RoomsController {
     return this.roomsService.findOne(id);
   }
 
+  @PublicRoute()
+  @Get(":id/booked-dates")
+  @ApiOkResponse({ description: "Get rooms by id successfully", type: Room })
+  getAllBookedDatesInRoom(@Param("id") id: string) {
+    return this.roomsService.getAllBookedDatesInRoom(id);
+  }
+
   @Patch(":id")
   @ApiOkResponse({ description: "Update rooms successfully" })
   @ApiForbiddenResponse({ description: "Forbidden." })
