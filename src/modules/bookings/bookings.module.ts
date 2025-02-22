@@ -10,5 +10,6 @@ import { Booking, BookingSchema } from "./entities/booking.entity";
   ],
   controllers: [BookingsController],
   providers: [BookingsService],
+  exports: [BookingsService],
 })
 export class BookingsModule {}
