@@ -56,15 +56,54 @@ export class SeederService {
     const { _id: hotelId } = await this.hotelModel.insertOne(hotel);
     const { _id: roomTypeId } = await this.roomTypeModel.insertOne(roomType);
 
-    const room: Room = {
-      hotel: hotelId,
-      roomType: roomTypeId,
-      status: "available",
-      roomNumber: 101,
-      pricePerNight: Types.Decimal128.fromString("100.00"),
-      images: [],
-    };
+    const rooms: Room[] = [
+      {
+        hotel: hotelId,
+        roomType: roomTypeId,
+        status: "available",
+        roomNumber: 101,
+        pricePerNight: Types.Decimal128.fromString("100.00"),
+        images: [],
+        name: "Standard Room"
+      },
+      {
+        hotel: hotelId,
+        roomType: roomTypeId,
+        status: "occupied",
+        roomNumber: 102,
+        pricePerNight: Types.Decimal128.fromString("150.00"),
+        images: [],
+        name: "Deluxe Room"
+      },
+      {
+        hotel: hotelId,
+        roomType: roomTypeId,
+        status: "available",
+        roomNumber: 103,
+        pricePerNight: Types.Decimal128.fromString("200.00"),
+        images: [],
+        name: "Suite"
+      },
+      {
+        hotel: hotelId,
+        roomType: roomTypeId,
+        status: "maintenance",
+        roomNumber: 104,
+        pricePerNight: Types.Decimal128.fromString("120.00"),
+        images: [],
+        name: "Family Room"
+      },
+      {
+        hotel: hotelId,
+        roomType: roomTypeId,
+        status: "available",
+        roomNumber: 105,
+        pricePerNight: Types.Decimal128.fromString("180.00"),
+        images: [],
+        name: "Executive Room"
+      }
+    ];
 
-    await this.roomModel.insertOne(room);
+    await this.roomModel.insertMany(rooms);
   }
 }
