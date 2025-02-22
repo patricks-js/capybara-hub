@@ -1,0 +1,15 @@
+meta {
+  name: Get room booked dates
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{baseUrl}}/api/rooms/:id/booked-dates
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+}
